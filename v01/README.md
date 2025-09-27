@@ -24,8 +24,8 @@
 >        return "Hello World!";
 >      }
 >
->> ##### Example on how to call it:  
->>         `print(helloWorld);`
->>
->>> ###### Which will result in this output:  
->>> Hello World!
+> #### Example on how to call it:  
+>         `print(helloWorld);`
+>
+>> ##### Which will result in this output:  
+>> Hello World!
