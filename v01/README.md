@@ -1,4 +1,6 @@
-A simple command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit tests in `test/`.
+# Simple Dart Calculator project
+
+*A simple command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit tests in `test/`.*
 
 ## How to run the program
 1. Open a terminal.
@@ -22,8 +24,8 @@ A simple command-line application with an entrypoint in `bin/`, library code in 
 >        return "Hello World!";
 >      }
 >
->> Example on how to call it:  
+>> ##### Example on how to call it:  
 >>         `print(helloWorld);`
 >>
->>> Which will result in this output:  
+>>> ###### Which will result in this output:  
 >>> Hello World!
