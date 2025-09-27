@@ -4,27 +4,26 @@ A simple command-line application with an entrypoint in `bin/`, library code in 
 1. Open a terminal.
 2. Navigate to the `v01` folder.
 3. Run:
-   `bash`
    `dart run bin/main.dart`
 
 
 ## How to write a function in Dart
 
-- A function in Dart has:
+###### A function in Dart has:
 - A return type (the type of value it gives back)
 - A function name (in lowerCamelCase)
 - Optional parameters inside ()
 - A body inside { } with the code to run
 
 
-> ### Example:
+> #### Example:
 >
->   String helloWorld() {
->     return "Hello World!";
->   }
+>      String helloWorld() {
+>        return "Hello World!";
+>      }
 >
->Example on how to call it:
->   print(helloWorld);
+> Example on how to call it:
+>      print(helloWorld);
 >
->>Which will result in this output:
->>Hello World!
+>> Which will result in this output:
+>> Hello World!
