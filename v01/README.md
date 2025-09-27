@@ -25,7 +25,7 @@
 >      }
 >
 > #### Example on how to call it:  
->         `print(helloWorld);`
+>         print(helloWorld);
 >
->> ##### Which will result in this output:  
+>> #### Which will result in this output:  
 >> Hello World!
