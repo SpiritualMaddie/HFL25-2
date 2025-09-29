@@ -6,7 +6,7 @@
 1. Open a terminal.
 2. Navigate to the `v01` folder.
 3. Run:
-   `dart run bin/main.dart`
+   `dart run bin/v01.dart`
 
 
 ## How to write a function in Dart
