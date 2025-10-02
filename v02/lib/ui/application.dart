@@ -44,13 +44,11 @@ class Application{
         break;
         case "2":
         heroUI.showHerosUI();
-        //print("Visa hjältar - skriv ut alla hjältar i listan. Sortera dem efter styrka (starkast först).");
-        stdin.readLineSync();
         break;
         case "3":
-        //heroUI.searchHeroUI();
-        print("Sök hjälte - låt användaren skriva in en bokstav eller ett namn och visa matchande hjältar.");
-        stdin.readLineSync();
+        heroUI.searchHeroUI();
+        //print("Sök hjälte - låt användaren skriva in en bokstav eller ett namn och visa matchande hjältar.");
+        //stdin.readLineSync();
         break;
         case "4":
         consoleUtils.endScreen();

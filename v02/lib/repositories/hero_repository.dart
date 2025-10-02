@@ -1,4 +1,3 @@
-
 class HeroRepository {
 
   // Private constructor for Singelton
@@ -33,4 +32,14 @@ class HeroRepository {
   List<Map<String, dynamic>> getAllHeros(){
     return heroesList;
   }
+
+String heroToString(Map<String, dynamic> heroMap) {
+  return ("""
+Id: ${heroMap["HeroId"]}
+Namn: ${heroMap["name"]}
+Styrka: ${heroMap["powerstats"]["strength"]}
+Art: ${heroMap["appearance"]["species"]}
+Moral: ${heroMap["biography"]["alignment"]}
+""");
+}
 }
