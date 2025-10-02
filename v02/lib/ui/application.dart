@@ -1,13 +1,22 @@
 import 'dart:io';
-//import 'package:v02/ui/heroUI.dart';
+import 'package:v02/ui/hero_ui.dart';
 import 'package:v02/utils/console_utils.dart';
 import 'package:v02/utils/menu.dart';
 
 class Application{
 
+  // Private constructor for Singelton
+  Application._internal();
+
+  // Stingle static instance
+  static final Application _instance = Application._internal();
+
+  // Public accessor of the Singleton
+  factory Application() => _instance;
+
   void startMenu(){
     final consoleUtils = ConsoleUtils();
-    //final heroUI = HeroUI();
+    final heroUI = HeroUI();
 
     while (true) {
       consoleUtils.clearConsole();
@@ -21,7 +30,7 @@ class Application{
 
       Menu mainMenu = Menu(options: options, prompt: prompt);
 
-      consoleUtils.logo();
+      //consoleUtils.logo();
       print(mainMenu);
 
       var input = stdin.readLineSync();
@@ -34,8 +43,8 @@ class Application{
         stdin.readLineSync();
         break;
         case "2":
-        //heroUI.showHerosUI();
-        print("Visa hjältar - skriv ut alla hjältar i listan. Sortera dem efter styrka (starkast först).");
+        heroUI.showHerosUI();
+        //print("Visa hjältar - skriv ut alla hjältar i listan. Sortera dem efter styrka (starkast först).");
         stdin.readLineSync();
         break;
         case "3":
