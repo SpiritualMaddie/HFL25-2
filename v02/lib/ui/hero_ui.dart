@@ -11,11 +11,95 @@ class HeroUI {
   ConsoleUtils consoleUtils = ConsoleUtils();
   Application app = Application();
 
-  void addHeroUI(){
+// Function to add hero
+  void addHeroUI() {
+  String heroName = "";
+  int heroStrength = 0;
+  String heroSpecies = "";
+  String heroAlignment = "";
+
+  consoleUtils.clearConsole();
+  print("Lägg till hjälte - användaren skriver in namn, styrka (int), och kanske en specialkraft.");
+  print("*******************************************************************************\n");
+
+  // Ask for name
+  while (true) {
+    stdout.writeln("Vad har superhjälten för namn (har hen två ord i namnet separera dom med ett mellanslag)?");
+    heroName = stdin.readLineSync()?.trim() ?? "";
+    if (heroName.isNotEmpty) break;
+
     consoleUtils.clearConsole();
-    print("Lägg till hjälte - användaren skriver in namn, styrka (int), och kanske en specialkraft.");
-    print("**************************************************************\n");
+    print("Du måste skriva något. Vänligen försök igen.");
   }
+
+  // Ask for strength
+  heroStrength = inputUtils.getValidIntWithLoopMaxTwenty("Vad har superhjälten för styrka (ange heltal mellan 1-20)?");
+
+  // Ask for species
+  print("Vad är superhjälten för art?");
+  print("""
+  1. Människa
+  2. Mutant
+  3. Halvgudinna
+  4. Halvgud
+  5. Himmelskt väsen
+  6. Utomjording
+  7. Djur
+  8. Cyborg/robot
+  9. Magisk varelse
+  10. Fantasi-varelser
+  11. Andra icke-mänskliga arter
+  """);
+
+  while (heroSpecies.isEmpty) {
+    String speciesChoice = stdin.readLineSync()?.trim() ?? "";
+    switch (speciesChoice) {
+      case "1": heroSpecies = "Human"; break;
+      case "2": heroSpecies = "Mutant"; break;
+      case "3": heroSpecies = "Demigoddess"; break;
+      case "4": heroSpecies = "Demigod"; break;
+      case "5": heroSpecies = "Celestial"; break;
+      case "6": heroSpecies = "Alien"; break;
+      case "7": heroSpecies = "Animal"; break;
+      case "8": heroSpecies = "Cyborg/robot"; break;
+      case "9": heroSpecies = "Magical creature"; break;
+      case "10": heroSpecies = "Fantasy creature"; break;
+      case "11": heroSpecies = "Other non-human species"; break;
+      default:
+        print("Valet finns inte, vänligen försök igen.");
+    }
+  }
+
+  // Ask for alignment
+  print("Vad har superhjälten för moral?");
+  print("""
+1. God
+2. Ond
+3. Diskutabel
+""");
+
+  while (heroAlignment.isEmpty) {
+    String alignmentChoice = stdin.readLineSync()?.trim() ?? "";
+    switch (alignmentChoice) {
+      case "1": heroAlignment = "Good"; break;
+      case "2": heroAlignment = "Evil"; break;
+      case "3": heroAlignment = "Debatable"; break;
+      default:
+        print("Valet finns inte, vänligen försök igen.");
+    }
+  }
+
+  // Add hero to List
+  heroRepo.addHero(inputUtils.capitalizeTwoWords(heroName), heroStrength, heroSpecies, heroAlignment);
+
+  // Confirm and show hero
+  consoleUtils.clearConsole();
+  print("Hjälten är tillagd!\n");
+  var lastHeroAdded = heroRepo.heroesList.last;
+  print(heroRepo.heroToString(lastHeroAdded));
+  print("\nTryck Enter för att fortsätta.");
+  stdin.readLineSync();
+}
 
 // Function to show all the heroes, sorted by strongest
   void showHerosUI(){
@@ -23,7 +107,7 @@ class HeroUI {
 
     // Get all heros saved in list
     print("Alla hjältar i listan. Sorterat efter styrka (starkast först).");
-    print("**************************************************************\n");
+    print("*******************************************************************************\n");
     var allHeros = heroRepo.getAllHeros();
 
     // Sort by strength
