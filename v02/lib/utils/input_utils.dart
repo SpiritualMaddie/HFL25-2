@@ -6,11 +6,11 @@ class InputUtils {
     return word[0].toUpperCase() + word.substring(1).toLowerCase();
   }
 
-  String capitalizeTwoWords(String name){
-    if (name.isEmpty) return name;
+  String capitalizeTwoWords(String twoWords){
+    if (twoWords.isEmpty) return twoWords;
 
-    // Split by spaces
-    List<String> words = name.trim().split(RegExp(r"\s+"));
+    // Split twoWords by spaces
+    List<String> words = twoWords.trim().split(RegExp(r"\s+"));
 
     // Capitalize each word
     List<String> capitalizedWords = words.map((word) {
