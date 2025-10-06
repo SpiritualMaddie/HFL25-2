@@ -34,7 +34,6 @@ class HeroRepository {
     });
   }
 
-
   // Function to get all the heroes in the List
   List<Map<String, dynamic>> getAllHeros(){
     return heroesList;

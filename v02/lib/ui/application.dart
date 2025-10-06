@@ -14,6 +14,7 @@ class Application{
   // Public accessor of the Singleton
   factory Application() => _instance;
 
+  // Function to run menu
   void startMenu(){
     final consoleUtils = ConsoleUtils();
     final heroUI = HeroUI();
