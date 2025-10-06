@@ -1,17 +1,21 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:io';
 import 'package:v02/repositories/hero_repository.dart';
 import 'package:v02/ui/application.dart';
 import 'package:v02/utils/console_utils.dart';
 import 'package:v02/utils/input_utils.dart';
+import 'package:v02/validators/get_valid_int.dart';
 
 class HeroUI {
 
   HeroRepository heroRepo = HeroRepository();
-  InputUtils inputUtils = InputUtils();
   ConsoleUtils consoleUtils = ConsoleUtils();
+  GetValidInt getValidInt = GetValidInt();
+  InputUtils inputUtils = InputUtils();
   Application app = Application();
 
-// Function to add hero
+  // Function to add hero
   void addHeroUI() {
   String heroName = "";
   int heroStrength = 0;
@@ -19,12 +23,12 @@ class HeroUI {
   String heroAlignment = "";
 
   consoleUtils.clearConsole();
-  print("Lägg till hjälte - användaren skriver in namn, styrka (int), och kanske en specialkraft.");
-  print("*******************************************************************************\n");
+  print("Lägg till hjälte");
+  print("******************\n");
 
   // Ask for name
   while (true) {
-    stdout.writeln("Vad har superhjälten för namn (har hen två ord i namnet separera dom med ett mellanslag)?");
+    stdout.writeln("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?");
     heroName = stdin.readLineSync()?.trim() ?? "";
     if (heroName.isNotEmpty) break;
 
@@ -33,7 +37,7 @@ class HeroUI {
   }
 
   // Ask for strength
-  heroStrength = inputUtils.getValidIntWithLoopMaxTwenty("Vad har superhjälten för styrka (ange heltal mellan 1-20)?");
+  heroStrength = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för styrka (ange heltal mellan 1-20)?");
 
   // Ask for species
   print("Vad är superhjälten för art?");
@@ -90,7 +94,7 @@ class HeroUI {
   }
 
   // Add hero to List
-  heroRepo.addHero(inputUtils.capitalizeTwoWords(heroName), heroStrength, heroSpecies, heroAlignment);
+  heroRepo.addHero(inputUtils.capitalizeAllWords(heroName), heroStrength, heroSpecies, heroAlignment);
 
   // Confirm and show hero
   consoleUtils.clearConsole();
@@ -101,13 +105,13 @@ class HeroUI {
   stdin.readLineSync();
 }
 
-// Function to show all the heroes, sorted by strongest
+  // Function to show all the heroes, sorted by strongest
   void showHerosUI(){
     consoleUtils.clearConsole();
 
     // Get all heros saved in list
     print("Alla hjältar i listan. Sorterat efter styrka (starkast först).");
-    print("*******************************************************************************\n");
+    print("**************************************************************\n");
     var allHeros = heroRepo.getAllHeros();
 
     // Sort by strength
@@ -129,18 +133,18 @@ class HeroUI {
     stdin.readLineSync();
   }
 
-// Function to search for a hero in saved heroes
+  // Function to search for a hero in saved heroes
   void searchHeroUI(){
     while (true) {
       consoleUtils.clearConsole();
       
       // Promt to user   
       print("Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i systemet");
-      print("*******************************************************************************\n");
+      print("******************************************************************************\n");
       
       // Taking in input from user
       String input = stdin.readLineSync()?.trim() ?? "";
-      String heroName = inputUtils.capitalizeTwoWords(input);
+      String heroName = inputUtils.capitalizeAllWords(input);
 
       if(input.isNotEmpty){
         // Fetch all heros and search hero based on user input
