@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:v03/repositories/hero_repository.dart';
+import 'package:v03/managers/hero_repository.dart';
 
 void main() {
   // Test to check if addHero adds a hero correctly

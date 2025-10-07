@@ -1,4 +1,5 @@
-import 'package:v03/repositories/hero_repository.dart';
+import 'package:v03/managers/hero_repository.dart';
+
 class DummyData {
     HeroRepository heroRepo = HeroRepository();
 

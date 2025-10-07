@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
 import 'dart:io';
-import 'package:v03/repositories/hero_repository.dart';
+import 'package:v03/managers/hero_repository.dart';
 import 'package:v03/ui/application.dart';
 import 'package:v03/utils/console_utils.dart';
 import 'package:v03/utils/input_utils.dart';
