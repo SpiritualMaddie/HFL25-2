@@ -61,6 +61,7 @@ class HeroModel {
         this.aliases
     });
 
+    // TODO add nesting in fromjason
     // Nested structures on json file
     // powerstats
     // biography
@@ -69,13 +70,13 @@ class HeroModel {
     // connections
     // image
 
-    // TODO Serialization
+    // TODO create Serialization
     // Map<String, dynamic> toJson() => {
     //     "hero-id" : heroId,
     //     "name" : name
     // };
 
-    // TODO Deserialization
+    // TODO Deserialization - update with jdon nesting structure
     factory HeroModel.fromJson(Map<String, dynamic> json){
         List<String> missingFields = [];
 
