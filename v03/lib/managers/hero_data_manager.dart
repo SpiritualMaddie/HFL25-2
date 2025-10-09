@@ -1,5 +1,6 @@
 import 'package:v03/data/models/hero_model.dart';
 import 'package:v03/managers/hero_data_managing.dart';
+import 'package:v03/utils/input_utils.dart';
 
 //TODO
 // Skapa en singleton HeroDataManager som extends HeroDataManaging, använd factory.
@@ -21,26 +22,45 @@ class HeroDataManager implements HeroDataManaging{
   factory HeroDataManager() => _instance;
 
   // List of heroes
-  late List<HeroModel> heroesList;
+  final List<HeroModel> _heroesList = [];
   
   @override
-  Future<HeroModel> createHero(HeroModel hero) {
-    // TODO: implement createHero
-    throw UnimplementedError();
+  Future<HeroModel> createHero(HeroModel hero) async {
+    _heroesList.add(hero);
+    return hero;
   }
   
   @override
-  Future<List<HeroModel>> getAllHeroes() {
-    // TODO: implement getAllHeroes
-    throw UnimplementedError();
+  Future<List<HeroModel>> getAllHeroes() async {
+    return _heroesList;
   }
   
   @override
-  Future<List<HeroModel?>> getHeroByName(String heroName) {
-    // TODO: implement getHeroByName
-    throw UnimplementedError();
+  Future<List<HeroModel>> getHeroByName(String heroName) async {
+    final search = heroName.toLowerCase();
+    return _heroesList
+        .where((h) => h.name.toLowerCase().contains(search))
+        .toList();
   }
-
-
   
+  @override
+  Future<void> deleteHero(int id) async {
+    _heroesList.removeWhere((h) => h.heroId == id);
+  }
+  
+  // TODO check if works as expected
+  @override
+  Future<HeroModel> updateHero(HeroModel updatedHero) async {
+    final index = _heroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
+    if (index == -1) {
+      throw Exception("Hero with ID ${updatedHero.heroId} not found");
+    }
+    _heroesList[index] = updatedHero;
+    return updatedHero;
+  }
+  
+  // @override
+  // Future<HeroModel?> getHeroById(int id) async {
+  //   return _heroesList.firstWhere((h) => h.heroId == id, orElse: () => null);
+  // }
 }
