@@ -4,8 +4,8 @@ class AppearanceModel {
   String? eyeColor;
   String? hairColor;
 
-  List<String> height = [];
-  List<String> weight = [];
+  List<dynamic> height = [];
+  List<dynamic> weight = [];
 
   AppearanceModel({
     required this.gender,
@@ -54,6 +54,7 @@ class AppearanceModel {
     return ("""
 ------------------------------------------------
 Utseende:
+------------------------------------------------
   Kön:          $gender
   Ras:          $race
   Längd:        $height
