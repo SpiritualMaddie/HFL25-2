@@ -5,10 +5,6 @@ import 'package:v03/data/models/hero_model.dart';
 import 'package:v03/managers/hero_data_managing.dart';
 
 //TODO
-// Skapa en singleton HeroDataManager som extends HeroDataManaging, använd factory.
-// Klassen ska innehålla en lista som tar datatypen HeroModel. 
-// ( Har du byggt en lokal sparning / databas använd den )
-// Implementera funktioner som, saveHero, getHeroList, searchHero som blir ett krav.
 // Viktigt med Future och async - await och bygg det med snyggast user experience.
 // Använd den överallt i appen där nåt med hero data behöver hanteras.. 
 
@@ -28,7 +24,23 @@ class HeroDataManager implements HeroDataManaging{
   
   @override
   Future<HeroModel> createHero(HeroModel hero) async {
-    _heroesList.add(hero);
+    // Auto-increment ID adding +1 from the highest existing ID
+    int newId = _heroesList.isEmpty 
+                ? 1 
+                : _heroesList.last.heroId + 1; // - Auto-increment ID based on the last hero in the list
+              //  : _heroesList.map((h) => h.heroId).reduce((a, b) => a > b ? a : b) + 1; // - Auto-increment ID based on the last hero in the json
+
+    final newHero = HeroModel(
+      heroId: newId,
+      name: hero.name,
+      powerstats: hero.powerstats,
+      biography: hero.biography,
+      appearance: hero.appearance,
+      image: hero.image,
+      work: hero.work,
+      connections: hero.connections,
+    );
+    _heroesList.add(newHero);
     return hero;
   }
   

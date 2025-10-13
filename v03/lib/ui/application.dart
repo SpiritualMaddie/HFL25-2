@@ -15,7 +15,7 @@ class Application{
   factory Application() => _instance;
 
   // Function to run menu
-  void startMenu(){
+  Future<void> startMenu() async {
     final consoleUtils = ConsoleUtils();
     final heroUI = HeroUI();
 
@@ -36,9 +36,9 @@ class Application{
       var input = stdin.readLineSync();
 
       switch(input){
-        case "1": heroUI.addHeroUI(); break;
-        case "2": heroUI.showHerosUI(); break;
-        case "3": heroUI.searchHeroUI(); break;
+        case "1": await heroUI.addHeroUI(); break;
+        case "2": await heroUI.showHerosUI(); break;
+        case "3": await heroUI.searchHeroUI(); break;
         case "4": consoleUtils.endScreen(); break;      
         default: consoleUtils.invalidChoice();
       }
