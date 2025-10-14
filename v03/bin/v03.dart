@@ -4,13 +4,15 @@ import 'package:v03/ui/application.dart';
 import 'package:v03/data/mock_data.dart';
 
 Future<void> main(List<String> arguments) async {
-  // Application app = Application();
+  final app = Application();
   final dataManager = HeroDataManager();
   MockData mockData = MockData();
 
   await mockData.loadMockHeroes(dataManager);
 
-  var allHeroes = await dataManager.getAllHeroes();
-  print(allHeroes.last.toString());
+  app.startMenu();
+
+  // var allHeroes = await dataManager.getAllHeroes();
+  // print(allHeroes.last.toString());
 
 }

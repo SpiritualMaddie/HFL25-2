@@ -3,7 +3,7 @@ import 'dart:io';
 class GetValidInt {
 
   // Validating input as int, looping unless correct, with prompt to create customizable start message to user
-  int getValidIntWithLoopMaxTwenty(String prompt) {
+  int getValidIntWithLoopMax100(String prompt) {
     while (true) {
       stdout.writeln(prompt);
       String input = stdin.readLineSync()?.trim() ?? "";
@@ -16,12 +16,12 @@ class GetValidInt {
       // try to check that input is an int
       try {
         int valueInt = int.parse(input);
-        if (valueInt < 1) {
-          stdout.writeln("Siffran kan inte vara noll eller negativt. Försök igen.");
+        if (valueInt < 0) {
+          stdout.writeln("Siffran kan inte vara negativt. Försök igen.");
           continue;
         }
-        if (valueInt > 20) {
-          stdout.writeln("Siffran kan inte vara över 20. Försök igen.");
+        if (valueInt > 100) {
+          stdout.writeln("Siffran kan inte vara över 100. Försök igen.");
           continue;
         }
         return valueInt;

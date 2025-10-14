@@ -1,12 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:v03/data/models/hero_model.dart';
 import 'package:v03/managers/hero_data_managing.dart';
-
-//TODO
-// Viktigt med Future och async - await och bygg det med snyggast user experience.
-// Använd den överallt i appen där nåt med hero data behöver hanteras.. 
 
 class HeroDataManager implements HeroDataManaging{
 

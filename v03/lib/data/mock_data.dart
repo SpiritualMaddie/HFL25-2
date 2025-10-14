@@ -13,6 +13,7 @@ class MockData {
   Future<void> loadMockHeroes(HeroDataManager dataManager) async {
     final heroes = <HeroModel>[
       HeroModel(
+        heroId: 1,
         name: "Superman",
         powerstats: PowerstatsModel(
           intelligence: 94,
@@ -51,6 +52,7 @@ class MockData {
         ),        
       ),
       HeroModel(
+        heroId: 2,
         name: "Wonder Woman",
         powerstats: PowerstatsModel(
           intelligence: 88,
@@ -88,6 +90,7 @@ class MockData {
         ),      
       ),
       HeroModel(
+        heroId: 3,
         name: "Spider-Man",
         powerstats: PowerstatsModel(
           intelligence: 90,
@@ -127,6 +130,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 4,
         name: "Doctor Strange",
         powerstats: PowerstatsModel(
           intelligence: 100,
@@ -167,6 +171,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 5,
         name: "Captain Marvel",
         powerstats: PowerstatsModel(
           intelligence: 84,
@@ -207,6 +212,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 6,
         name: "Neural Weaver",
         powerstats: PowerstatsModel(
           intelligence: 95,
@@ -246,6 +252,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 7,
         name: "Code Saint",
         powerstats: PowerstatsModel(
           intelligence: 98,
@@ -285,6 +292,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 8,
         name: "Echoheart",
         powerstats: PowerstatsModel(
           intelligence: 88,
@@ -324,6 +332,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 9,
         name: "Synapse Knight",
         powerstats: PowerstatsModel(
           intelligence: 90,
@@ -363,6 +372,7 @@ class MockData {
         ),
       ),
       HeroModel(
+        heroId: 10,
         name: "Ghostline",
         powerstats: PowerstatsModel(
           intelligence: 92,

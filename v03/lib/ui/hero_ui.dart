@@ -1,26 +1,26 @@
 import 'dart:io';
-import 'package:v03/data/models/appearance_model.dart';
-import 'package:v03/data/models/biography_model.dart';
 import 'package:v03/data/models/connections_model.dart';
-import 'package:v03/data/models/hero_model.dart';
-import 'package:v03/data/models/image_model.dart';
+import 'package:v03/data/models/appearance_model.dart';
 import 'package:v03/data/models/powerstats_model.dart';
-import 'package:v03/data/models/work_model.dart';
+import 'package:v03/data/models/biography_model.dart';
 import 'package:v03/managers/hero_data_manager.dart';
-import 'package:v03/managers/hero_repository.dart';
-import 'package:v03/ui/application.dart';
+import 'package:v03/validators/get_valid_int.dart';
+import 'package:v03/data/models/image_model.dart';
+import 'package:v03/data/models/hero_model.dart';
+import 'package:v03/data/models/work_model.dart';
+import 'package:v03/utils/get_model_input.dart';
 import 'package:v03/utils/console_utils.dart';
 import 'package:v03/utils/input_utils.dart';
-import 'package:v03/validators/get_valid_int.dart';
+import 'package:v03/ui/application.dart';
 
 class HeroUI {
 
-  //HeroRepository heroRepo = HeroRepository();
   final dataManager = HeroDataManager();
-  ConsoleUtils consoleUtils = ConsoleUtils();
-  GetValidInt getValidInt = GetValidInt();
-  InputUtils inputUtils = InputUtils();
-  Application app = Application();
+  final consoleUtils = ConsoleUtils();
+  final getValidInt = GetValidInt();
+  final inputUtils = InputUtils();
+  final getModelInput = GetModelInput();
+  final app = Application();
 
   // Function to add hero
   Future<void> addHeroUI() async {
@@ -31,73 +31,42 @@ class HeroUI {
     print("******************\n");
 
     // Ask for name
-    while (true) {
-      stdout.writeln("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?");
-      var heroNameInput = stdin.readLineSync()?.trim() ?? "";
-      if (heroNameInput.isNotEmpty) {
-        heroName = inputUtils.capitalizeAllWords(heroNameInput);
-        break;
-      }
-
-      consoleUtils.clearConsole();
-      print("Du måste skriva något. Vänligen försök igen.");
-    }
+    heroName = inputUtils.promptNotEmpty("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?");
 
     // Ask for powerstats
-    int heroIntelligence = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för intelligens (ange heltal)?");
-    int heroStrength = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för styrka (ange heltal)?");
-    int heroSpeed = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för snabbhet (ange heltal)?");
-    int heroDurability = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för hållbarhet (ange heltal)?");
-    int heroPower = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för kraft (ange heltal)?");
-    int heroCombat = getValidInt.getValidIntWithLoopMaxTwenty("Vad har superhjälten för stridsvärde (ange heltal)?");
-
+    PowerstatsModel powerstats = getModelInput.getPowerStatsInput();
 
     // Ask for biography
-    while (true) {
-      stdout.writeln("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?");
-      var heroNameInput = stdin.readLineSync()?.trim() ?? "";
-      if (heroNameInput.isNotEmpty) {
-        heroName = inputUtils.capitalizeAllWords(heroNameInput);
-        break;
-      }
+    BiographyModel biography = getModelInput.getBiographyInput();
 
-      consoleUtils.clearConsole();
-      print("Du måste skriva något. Vänligen försök igen.");
-    }
+    // Ask for appearance
+    AppearanceModel appearance = getModelInput.getAppearanceInput();
 
-    // Ask for alignment
-    print("Vad har superhjälten för moral?");
+    // Ask for work
+    WorkModel? work = getModelInput.getWorkInput();
+
+    // Ask for connections
+    ConnectionsModel? connections = getModelInput.getConnectionsInput();
+
+    // Ask for image
+    ImageModel image = getModelInput.getImageInput();
 
 
-    // TODO Create hero and add to List
-    dataManager.createHero(HeroModel(
-      name: heroName,
-      powerstats: PowerstatsModel(
-        intelligence: heroIntelligence, 
-        strength: heroStrength, 
-        speed: heroSpeed, 
-        durability: heroDurability, 
-        power: heroPower, 
-        combat: heroCombat
-      ), 
-      biography: BiographyModel(
-        placeOfBirth: heroPlaceOfBirth,
-        firstAppearance: heroFirstAppearance,
-        publisher: heroPublisher,
-        alignment: heroAlignment
-      ),
-      appearance: AppearanceModel(
-        gender: heroGender,
-        race: heroRace,
-        height: heroHeight,
-        weight: heroWeight
-      ),
-      image: ImageModel(
-        url: heroUrl
-      ),
-    ));
+    // Create new hero TODO null checks?
+    final newHero = HeroModel(
+      name: heroName, 
+      powerstats: powerstats, 
+      biography: biography, 
+      appearance: appearance, 
+      image: image,
+      work: work,
+      connections: connections
+      );
 
-    // TODO Confirm and show hero
+    // Add new hero to heroesList
+    await dataManager.createHero(newHero);
+
+    // Confirm and show hero
     consoleUtils.clearConsole();
     print("💾 Hjälten är tillagd!\n");
     var allHeroes = await dataManager.getAllHeroes();
