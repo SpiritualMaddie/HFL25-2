@@ -1,6 +1,6 @@
 import 'package:v03/data/models/appearance_model.dart';
 import 'package:v03/data/models/biography_model.dart';
-import 'package:v03/data/models/connections.dart';
+import 'package:v03/data/models/connections_model.dart';
 import 'package:v03/data/models/image_model.dart';
 import 'package:v03/data/models/powerstats_model.dart';
 import 'package:v03/data/models/work_model.dart';
@@ -15,7 +15,7 @@ class HeroModel {
   final AppearanceModel appearance;
   final ImageModel image;
   final WorkModel? work;
-  final Connections? connections;
+  final ConnectionsModel? connections;
 
   HeroModel({
       this.heroId = 0,
@@ -44,20 +44,28 @@ class HeroModel {
     }
 
     return HeroModel(
-        heroId : json["hero-id"],
+        heroId : int.parse(json["hero-id"]),
         name : json["name"],
-        powerstats : json["powerstats"],
-        biography : json["biography"],
-        appearance : json["appearance"],
-        work : json["work"],
-        connections : json["connections"],
-        image : json["image"],
+        powerstats : json["powerstats"] != null
+                    ? PowerstatsModel.fromJson(json["powerstats"])
+                    : PowerstatsModel(intelligence: 0, strength: 0, speed: 0, durability: 0, power: 0, combat: 0),
+        biography : json["biography"] != null
+                    ? BiographyModel.fromJson(json["biography"])
+                    : BiographyModel(placeOfBirth: "unknown", firstAppearance: "unknown", publisher: "unknown", alignment: "unknown"),
+        appearance : json["appearance"] != null
+                    ? AppearanceModel.fromJson(json["appearance"])
+                    : AppearanceModel(gender: "unknown", race: "unknown", height: ["unknown"], weight: ["unknown"]),
+        work : WorkModel.fromJson(json["work"]),
+        connections : ConnectionsModel.fromJson(json["connections"]),
+        image : json["image"] != null
+                ? ImageModel.fromJson(json["image"])
+                : ImageModel(url: "unknown"),
     );
   }
     
   // Serialization
   Map<String, dynamic> toJson() => {
-    "hero-id": heroId,
+    "hero-id": heroId.toString(),
     "name": name,
     "powerstats": powerstats.toJson(),
     "biography": biography.toJson(),

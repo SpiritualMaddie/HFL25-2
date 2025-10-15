@@ -6,7 +6,7 @@ class BiographyModel {
   String publisher;
   String alignment;
 
-  List<String>? aliases = [];
+  List<dynamic>? aliases = [];
 
   BiographyModel({
     required this.placeOfBirth,
@@ -58,6 +58,7 @@ class BiographyModel {
     return ("""
 ------------------------------------------------
 Biografi:
+------------------------------------------------
   Fullt namn:   $fullName
   Alter egon:   $alterEgos
   Alias:        $aliases

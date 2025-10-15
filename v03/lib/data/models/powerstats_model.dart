@@ -31,23 +31,23 @@ class PowerstatsModel {
     }
 
     return PowerstatsModel(
-        intelligence : json["intelligence"],
-        strength : json["strength"],
-        speed : json["speed"],
-        durability : json["durability"],
-        power : json["power"],
-        combat : json["combat"]
+        intelligence : int.parse(json["intelligence"]),
+        strength : int.parse(json["strength"]),
+        speed : int.parse(json["speed"]),
+        durability : int.parse(json["durability"]),
+        power : int.parse(json["power"]),
+        combat : int.parse(json["combat"])
     );
   }
 
   // Serialization
   Map<String, dynamic> toJson() => {
-    "intelligence": intelligence,
-    "strength": strength,
-    "speed": speed,
-    "durability": durability,
-    "power": power,
-    "combat": combat,
+    "intelligence": intelligence.toString(),
+    "strength": strength.toString(),
+    "speed": speed.toString(),
+    "durability": durability.toString(),
+    "power": power.toString(),
+    "combat": combat.toString(),
   };
 
   @override
@@ -55,6 +55,7 @@ class PowerstatsModel {
     return ("""
 ------------------------------------------------
 Krafter:
+------------------------------------------------
   Intelligens:  $intelligence
   Styrka:       $strength
   Snabbhet:     $speed

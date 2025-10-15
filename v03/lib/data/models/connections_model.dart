@@ -1,13 +1,13 @@
-class Connections {
+class ConnectionsModel {
   String? groupAffiliation;
   String? relatives;
 
-  Connections({this.groupAffiliation, this.relatives});
+  ConnectionsModel({this.groupAffiliation, this.relatives});
 
   // Deserialization
-  factory Connections.fromJson(Map<String, dynamic> json){
+  factory ConnectionsModel.fromJson(Map<String, dynamic> json){
 
-    return Connections(
+    return ConnectionsModel(
         groupAffiliation : json["group-affiliation"],
         relatives : json["relatives"],
     );
@@ -24,6 +24,7 @@ class Connections {
     return ("""
 ------------------------------------------------
 Kontakter:
+------------------------------------------------
   Gruppanknyt.: $groupAffiliation
   Anhöriga:     $relatives
 """);

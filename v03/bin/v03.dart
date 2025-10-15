@@ -1,9 +1,13 @@
+import 'package:v03/managers/hero_data_manager.dart';
 import 'package:v03/ui/application.dart';
-import 'package:v03/data/dummy_data.dart';
-void main(List<String> arguments) {
-  Application app = Application();
-  DummyData dummyData = DummyData();
+import 'package:v03/data/mock_data.dart';
 
-  dummyData.dummyData();
+Future<void> main(List<String> arguments) async {
+  final app = Application();
+  final dataManager = HeroDataManager();
+  MockData mockData = MockData();
+
+  await mockData.loadMockHeroes(dataManager);
+
   app.startMenu();
 }
