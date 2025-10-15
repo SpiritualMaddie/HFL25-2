@@ -19,15 +19,15 @@ class InputUtils {
     }
   }
 
-  // Ask for input, allow empty (returns empty string) TODO should it be null?
+  // Ask for input, allow empty (returns empty string)
   String promptOptional(String message) {
     stdout.writeln(message);
     final input = stdin.readLineSync()?.trim() ?? "";
     return input;
   }
 
-  // Ask for a list input (comma-separated)
-  List<String> promptList(String message) {
+  // Ask for a list input optional, can be empty (comma-separated)
+  List<String> promptListOptional(String message) {
     stdout.writeln(message);
     final input = stdin.readLineSync()?.trim() ?? "";
     if (input.isEmpty) return [];
@@ -37,6 +37,23 @@ class InputUtils {
         .map((e) => e.trim())
         .where((e) => e.isNotEmpty)
         .toList();
+  }
+
+    // Ask for a list input non optional (comma-separated)
+  List<String> promptList(String message) {
+    while (true) { 
+      stdout.writeln(message);
+      final input = stdin.readLineSync()?.trim() ?? "";
+      if (input.isNotEmpty) {
+        return input
+            .split(", ")
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList();
+      }
+
+        print("❗ Du måste skriva något. Försök igen.\n");
+    }
   }
 
   // Ask user to choose from options (case-insensitive)
@@ -53,7 +70,7 @@ class InputUtils {
     }
   }
 
-  // Capitalize each word (like "peter parker" → "Peter Parker")
+  // Capitalize each word in a text
   String capitalizeAllWords(String text) {
     if (text.isEmpty) return text;
     return text
@@ -62,21 +79,4 @@ class InputUtils {
             word.isEmpty ? "" : word[0].toUpperCase() + word.substring(1).toLowerCase())
         .join(' ');
   }
-
-  // // TODO remove if other works - Function to capitalize two words in a String
-  // String capitalizeAllWords(String words){
-  //   if (words.isEmpty) return words;
-
-  //   // Split twoWords by spaces
-  //   List<String> wordsSplit = words.trim().split(RegExp(r"\s+"));
-
-  //   // Capitalize each word
-  //   List<String> capitalizedWords = wordsSplit.map((word) {
-  //     if(word.isEmpty) return word;
-  //     return word[0].toUpperCase() + word.substring(1).toLowerCase();
-  //   }).toList();
-
-  //   // Join them back into one string
-  //   return capitalizedWords.join(" ");
-  // }
 }

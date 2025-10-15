@@ -57,21 +57,21 @@ class MockDataManager implements HeroDataManaging{
         .toList();
   }
   
-  @override
-  Future<void> deleteHero(int id) async {
-    _mockHeroesList.removeWhere((h) => h.heroId == id);
-  }
+  // @override
+  // Future<void> deleteHero(int id) async {
+  //   _mockHeroesList.removeWhere((h) => h.heroId == id);
+  // }
   
   // TODO check if works as expected
-  @override
-  Future<HeroModel> updateHero(HeroModel updatedHero) async {
-    final index = _mockHeroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
-    if (index == -1) {
-      throw Exception("Hero with ID ${updatedHero.heroId} not found");
-    }
-    _mockHeroesList[index] = updatedHero;
-    return updatedHero;
-  }
+  // @override
+  // Future<HeroModel> updateHero(HeroModel updatedHero) async {
+  //   final index = _mockHeroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
+  //   if (index == -1) {
+  //     throw Exception("Hero with ID ${updatedHero.heroId} not found");
+  //   }
+  //   _mockHeroesList[index] = updatedHero;
+  //   return updatedHero;
+  // }
   
   // @override
   // Future<HeroModel?> getHeroById(int id) async {
@@ -96,7 +96,7 @@ Future<void> loadHeroesFromJsonToHeroesList() async {
   }
 }
 
-// TODO check this one
+// TODO remove when safe
 Future<void> syncListAndJsonData() async {
   try {
     final file = File(mockDataPath);
@@ -135,7 +135,7 @@ Future<void> syncListAndJsonData() async {
   }
 }
 
-
+// Use append
 Future<void> saveHeroToJson(HeroModel newHero) async {
   final file = File(mockDataPath);
   final jsonData = newHero.toJson();

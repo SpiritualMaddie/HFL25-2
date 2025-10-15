@@ -6,6 +6,6 @@ abstract class HeroDataManaging {
   Future<List<HeroModel>> getAllHeroes();
   Future<List<HeroModel>> getHeroByName(String heroName);
   //Future<HeroModel?> getHeroById(int id);
-  Future<HeroModel> updateHero(HeroModel updatedHero);
-  Future<void> deleteHero(int id);
+  //Future<HeroModel> updateHero(HeroModel updatedHero);
+  //Future<void> deleteHero(int id);
 }

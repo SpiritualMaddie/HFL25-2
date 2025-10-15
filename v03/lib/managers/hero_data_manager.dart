@@ -49,23 +49,25 @@ class HeroDataManager implements HeroDataManaging{
         .where((h) => h.name.toLowerCase().contains(search))
         .toList();
   }
+
+  // Delete hero prepered function 
+  // @override
+  // Future<void> deleteHero(int id) async {
+  //   _heroesList.removeWhere((h) => h.heroId == id);
+  // }
   
-  @override
-  Future<void> deleteHero(int id) async {
-    _heroesList.removeWhere((h) => h.heroId == id);
-  }
+  // Update hero prepered function
+  // @override
+  // Future<HeroModel> updateHero(HeroModel updatedHero) async {
+  //   final index = _heroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
+  //   if (index == -1) {
+  //     throw Exception("Hero with ID ${updatedHero.heroId} not found");
+  //   }
+  //   _heroesList[index] = updatedHero;
+  //   return updatedHero;
+  // }
   
-  // TODO check if works as expected
-  @override
-  Future<HeroModel> updateHero(HeroModel updatedHero) async {
-    final index = _heroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
-    if (index == -1) {
-      throw Exception("Hero with ID ${updatedHero.heroId} not found");
-    }
-    _heroesList[index] = updatedHero;
-    return updatedHero;
-  }
-  
+  // Get hero by id prepered function
   // @override
   // Future<HeroModel?> getHeroById(int id) async {
   //   return _heroesList.firstWhere((h) => h.heroId == id, orElse: () => null);

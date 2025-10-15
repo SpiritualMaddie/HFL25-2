@@ -24,14 +24,14 @@ class HeroUI {
 
   // Function to add hero
   Future<void> addHeroUI() async {
-    String heroName; 
 
     consoleUtils.clearConsole();
     print("Lägg till hjälte");
     print("******************\n");
 
     // Ask for name
-    heroName = inputUtils.promptNotEmpty("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?");
+    final heroName = inputUtils.capitalizeAllWords(
+      inputUtils.promptNotEmpty("Vad har superhjälten för namn \n(vid flera ord separera med ett mellanslag)?"));
 
     // Ask for powerstats
     PowerstatsModel powerstats = getModelInput.getPowerStatsInput();
@@ -52,7 +52,7 @@ class HeroUI {
     ImageModel image = getModelInput.getImageInput();
 
 
-    // Create new hero TODO null checks?
+    // Create new hero
     final newHero = HeroModel(
       name: heroName, 
       powerstats: powerstats, 
@@ -66,7 +66,7 @@ class HeroUI {
     // Add new hero to heroesList
     await dataManager.createHero(newHero);
 
-    // Confirm and show hero
+    // Confirm and show new hero
     consoleUtils.clearConsole();
     print("💾 Hjälten är tillagd!\n");
     var allHeroes = await dataManager.getAllHeroes();
@@ -109,7 +109,7 @@ class HeroUI {
       print("Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i systemet");
       print("******************************************************************************\n");
       
-      // Taking in input from user
+      // Taking in search input from user
       String input = stdin.readLineSync()?.trim() ?? "";
       String heroName = inputUtils.capitalizeAllWords(input);
 

@@ -18,11 +18,11 @@ final getValidInt = GetValidInt();
   PowerstatsModel getPowerStatsInput(){
     stdout.writeln("\n💪 Powerstats - Fyll i hjältens styrkor:");
 
-    int intelligence = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för intelligens (ange heltal)?");
-    int strength = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för styrka (ange heltal)?");
-    int speed = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för snabbhet (ange heltal)?");
-    int durability = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för hållbarhet (ange heltal)?");
-    int power = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för kraft (ange heltal)?");
+    int intelligence = getValidInt.getValidIntWithLoopMax100("Hur intelligent är superhjälten (ange heltal)?");
+    int strength = getValidInt.getValidIntWithLoopMax100("Hur stark är superhjälten (ange heltal)?");
+    int speed = getValidInt.getValidIntWithLoopMax100("Hur snabb är superhjälten (ange heltal)?");
+    int durability = getValidInt.getValidIntWithLoopMax100("Hur hållbar är superhjälten (ange heltal)?");
+    int power = getValidInt.getValidIntWithLoopMax100("Hur kraftfull är superhjälten (ange heltal)?");
     int combat = getValidInt.getValidIntWithLoopMax100("Vad har superhjälten för stridsvärde (ange heltal)?");
 
     return PowerstatsModel(
@@ -39,8 +39,10 @@ final getValidInt = GetValidInt();
 
     String fullName = inputUtils.promptOptional("Fullständigt namn  (Kan lämnas tomt):");
     String alterEgos = inputUtils.promptOptional("Alter egon (kan lämnas tomt):");
-    List<String> aliases = inputUtils.promptList("Alias (separera med kommatecken):");
-    String placeOfBirth = inputUtils.promptNotEmpty("Födelseplats:");
+    List<String> aliases = inputUtils.promptListOptional("Alias (separera med kommatecken, kan lämnas tomt):");
+    final placeOfBirth = inputUtils.capitalizeAllWords(
+      inputUtils.promptNotEmpty("Födelseplats:"),
+    );
     String firstAppearance = inputUtils.promptNotEmpty("Första framträdande:");
     String publisher = inputUtils.promptNotEmpty("Utgivare:");
     String alignment = inputUtils.promptFromOptions(
