@@ -8,7 +8,6 @@ import 'package:v03/data/models/powerstats_model.dart';
 import 'package:v03/data/models/work_model.dart';
 import 'package:v03/managers/hero_data_manager.dart';
 
-
 void main() {
   group('HeroDataManager', () {
     test('should add heroes and retrieve them correctly', () async {
