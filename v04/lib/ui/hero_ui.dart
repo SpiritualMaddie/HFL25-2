@@ -148,4 +148,52 @@ class HeroUI {
       }
     }
   }
+
+  Future<void> searchHeroApiUI() async {
+    while (true) {
+      consoleUtils.clearConsole();
+      
+      // Promt to user   
+      print("Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i SuperHero API");
+      print("******************************************************************************\n");
+      
+      // Taking in search input from user TODO clean up
+      String input = stdin.readLineSync()?.trim() ?? "";
+      String heroName = inputUtils.capitalizeAllWords(input);
+
+      if(input.isNotEmpty){
+        // Fetch all heros and search hero based on user input
+        var selectedHero = await dataManager.getHeroByNameApi(heroName);
+
+        if(selectedHero.isNotEmpty){
+          // Print out all the heroes that match the search
+          for (var hero in selectedHero) {
+            print(hero.toString());
+          }
+
+          // Check if user wants to do new search
+          print("Vill du göra en ny sökning? (ja/nej)");
+          while (true) {      
+            var userInput = stdin.readLineSync()?.trim().toLowerCase() ?? "";
+
+            if (userInput == "ja") {
+              break;
+            }
+            else if(userInput == "nej"){
+              await app.startMenu();
+            }
+            else{
+              print("Du måste skriva ja eller nej, var god försök igen:");
+            }
+          }
+        }else{
+          print("Det finns ingen hjälte som matchar din sökning...");
+          sleep(Duration(seconds: 3));         
+        }
+      }else{
+        print("Du måste skriva något...");
+        sleep(Duration(seconds: 2));
+      }
+    }
+  }
 }
