@@ -32,7 +32,7 @@ class HeroModel {
   factory HeroModel.fromJson(Map<String, dynamic> json){
     List<String> missingFields = [];
 
-    if(json["hero-id"] == null) missingFields.add("hero-id");
+    if(json["id"] == null) missingFields.add("id");
     if(json["name"] == null) missingFields.add("name");
     if(json["powerstats"] == null) missingFields.add("intelligence");
     if(json["biography"] == null) missingFields.add("strength");
@@ -44,7 +44,7 @@ class HeroModel {
     }
 
     return HeroModel(
-        heroId : int.parse(json["hero-id"]),
+        heroId : int.parse(json["id"]),
         name : json["name"],
         powerstats : json["powerstats"] != null
                     ? PowerstatsModel.fromJson(json["powerstats"])
@@ -65,7 +65,7 @@ class HeroModel {
     
   // Serialization
   Map<String, dynamic> toJson() => {
-    "hero-id": heroId.toString(),
+    "id": heroId.toString(),
     "name": name,
     "powerstats": powerstats.toJson(),
     "biography": biography.toJson(),

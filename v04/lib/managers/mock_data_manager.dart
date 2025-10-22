@@ -143,5 +143,11 @@ Future<void> saveHeroToJson(HeroModel newHero) async {
   print("💾 Hero saved to file.");
 }
 
+  @override
+  Future<List<HeroModel>> getHeroByNameApi(String heroName) {
+    // TODO: implement getHeroByNameApi
+    throw UnimplementedError();
+  }
+
 
 }
