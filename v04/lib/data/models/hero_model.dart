@@ -70,9 +70,9 @@ class HeroModel {
     "powerstats": powerstats.toJson(),
     "biography": biography.toJson(),
     "appearance": appearance.toJson(),
-    "image": image.toJson(),
     "work": work?.toJson(),
-    "connections": connections?.toJson()
+    "connections": connections?.toJson(),
+    "image": image.toJson(),
   };
 
   // Function to override toString and print the HeroModel more user friendly

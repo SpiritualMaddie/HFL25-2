@@ -1,6 +1,5 @@
 [
   {
-    "response": "success",
     "id": "1",
     "name": "Superman",
     "powerstats": {
@@ -14,7 +13,10 @@
     "biography": {
       "full-name": "Clark Kent",
       "alter-egos": "Superboy, Kal-El",
-      "aliases": ["Man of Steel", "The Last Son of Krypton"],
+      "aliases": [
+        "Man of Steel",
+        "The Last Son of Krypton"
+      ],
       "place-of-birth": "Krypton",
       "first-appearance": "Action Comics #1 (1938)",
       "publisher": "DC Comics",
@@ -23,8 +25,14 @@
     "appearance": {
       "gender": "Male",
       "race": "Kryptonian",
-      "height": ["6'3", "191 cm"],
-      "weight": ["225 lb", "102 kg"],
+      "height": [
+        "6'3",
+        "191 cm"
+      ],
+      "weight": [
+        "225 lb",
+        "102 kg"
+      ],
       "eye-color": "Blue",
       "hair-color": "Black"
     },
@@ -41,7 +49,6 @@
     }
   },
   {
-    "response": "success",
     "id": "2",
     "name": "Wonder Woman",
     "powerstats": {
@@ -55,7 +62,9 @@
     "biography": {
       "full-name": "Diana Prince",
       "alter-egos": "None",
-      "aliases": ["Princess Diana of Themyscira"],
+      "aliases": [
+        "Princess Diana of Themyscira"
+      ],
       "place-of-birth": "Themyscira",
       "first-appearance": "All Star Comics #8 (1941)",
       "publisher": "DC Comics",
@@ -64,8 +73,14 @@
     "appearance": {
       "gender": "Female",
       "race": "Amazon",
-      "height": ["6'0", "183 cm"],
-      "weight": ["165 lb", "75 kg"],
+      "height": [
+        "6'0",
+        "183 cm"
+      ],
+      "weight": [
+        "165 lb",
+        "75 kg"
+      ],
       "eye-color": "Blue",
       "hair-color": "Black"
     },
@@ -82,7 +97,6 @@
     }
   },
   {
-    "response": "success",
     "id": "3",
     "name": "Spider-Man",
     "powerstats": {
@@ -96,7 +110,11 @@
     "biography": {
       "full-name": "Peter Parker",
       "alter-egos": "Scarlet Spider, Spider-Carnage",
-      "aliases": ["Spidey", "Web-Slinger", "Friendly Neighborhood Spider-Man"],
+      "aliases": [
+        "Spidey",
+        "Web-Slinger",
+        "Friendly Neighborhood Spider-Man"
+      ],
       "place-of-birth": "Queens, New York",
       "first-appearance": "Amazing Fantasy #15 (1962)",
       "publisher": "Marvel Comics",
@@ -105,8 +123,14 @@
     "appearance": {
       "gender": "Male",
       "race": "Human (mutated)",
-      "height": ["5'10", "178 cm"],
-      "weight": ["167 lb", "76 kg"],
+      "height": [
+        "5'10",
+        "178 cm"
+      ],
+      "weight": [
+        "167 lb",
+        "76 kg"
+      ],
       "eye-color": "Hazel",
       "hair-color": "Brown"
     },
@@ -123,7 +147,6 @@
     }
   },
   {
-    "response": "success",
     "id": "4",
     "name": "Doctor Strange",
     "powerstats": {
@@ -137,7 +160,10 @@
     "biography": {
       "full-name": "Stephen Strange",
       "alter-egos": "None",
-      "aliases": ["Sorcerer Supreme", "Master of the Mystic Arts"],
+      "aliases": [
+        "Sorcerer Supreme",
+        "Master of the Mystic Arts"
+      ],
       "place-of-birth": "Philadelphia, Pennsylvania",
       "first-appearance": "Strange Tales #110 (1963)",
       "publisher": "Marvel Comics",
@@ -146,8 +172,14 @@
     "appearance": {
       "gender": "Male",
       "race": "Human",
-      "height": ["6'2", "188 cm"],
-      "weight": ["180 lb", "82 kg"],
+      "height": [
+        "6'2",
+        "188 cm"
+      ],
+      "weight": [
+        "180 lb",
+        "82 kg"
+      ],
       "eye-color": "Grey",
       "hair-color": "Black with white streaks"
     },
@@ -164,7 +196,6 @@
     }
   },
   {
-    "response": "success",
     "id": "5",
     "name": "Captain Marvel",
     "powerstats": {
@@ -178,7 +209,11 @@
     "biography": {
       "full-name": "Carol Danvers",
       "alter-egos": "Binary, Warbird",
-      "aliases": ["Ms. Marvel", "Binary", "Warbird"],
+      "aliases": [
+        "Ms. Marvel",
+        "Binary",
+        "Warbird"
+      ],
       "place-of-birth": "Boston, Massachusetts",
       "first-appearance": "Marvel Super-Heroes #13 (1968)",
       "publisher": "Marvel Comics",
@@ -187,8 +222,14 @@
     "appearance": {
       "gender": "Female",
       "race": "Human/Kree Hybrid",
-      "height": ["5'11", "180 cm"],
-      "weight": ["165 lb", "75 kg"],
+      "height": [
+        "5'11",
+        "180 cm"
+      ],
+      "weight": [
+        "165 lb",
+        "75 kg"
+      ],
       "eye-color": "Blue",
       "hair-color": "Blonde"
     },
@@ -205,7 +246,6 @@
     }
   },
   {
-    "response": "success",
     "id": "6",
     "name": "Neural Weaver",
     "powerstats": {
@@ -219,7 +259,9 @@
     "biography": {
       "full-name": "Lyra Venn",
       "alter-egos": "None",
-      "aliases": ["The Empathic Engineer"],
+      "aliases": [
+        "The Empathic Engineer"
+      ],
       "place-of-birth": "Oslo, Norway",
       "first-appearance": "Mindguard Chronicles #1",
       "publisher": "Mindforge Comics",
@@ -228,8 +270,14 @@
     "appearance": {
       "gender": "Female",
       "race": "Human (Enhanced)",
-      "height": ["5'7", "170 cm"],
-      "weight": ["135 lb", "61 kg"],
+      "height": [
+        "5'7",
+        "170 cm"
+      ],
+      "weight": [
+        "135 lb",
+        "61 kg"
+      ],
       "eye-color": "Green",
       "hair-color": "Blue"
     },
@@ -246,7 +294,6 @@
     }
   },
   {
-    "response": "success",
     "id": "7",
     "name": "Code Saint",
     "powerstats": {
@@ -260,7 +307,9 @@
     "biography": {
       "full-name": "Morgan Ailenn",
       "alter-egos": "None",
-      "aliases": ["The Digital Prophet"],
+      "aliases": [
+        "The Digital Prophet"
+      ],
       "place-of-birth": "Dublin, Ireland",
       "first-appearance": "Quantum Dawn #3",
       "publisher": "Mindforge Comics",
@@ -269,8 +318,14 @@
     "appearance": {
       "gender": "Non-binary",
       "race": "Cyborg",
-      "height": ["5'9", "175 cm"],
-      "weight": ["150 lb", "88 kg"],
+      "height": [
+        "5'9",
+        "175 cm"
+      ],
+      "weight": [
+        "150 lb",
+        "88 kg"
+      ],
       "eye-color": "Blue",
       "hair-color": "No hair"
     },
@@ -287,7 +342,6 @@
     }
   },
   {
-    "response": "success",
     "id": "8",
     "name": "Echoheart",
     "powerstats": {
@@ -301,7 +355,9 @@
     "biography": {
       "full-name": "Sarai Kellen",
       "alter-egos": "None",
-      "aliases": ["The Voice of Ages"],
+      "aliases": [
+        "The Voice of Ages"
+      ],
       "place-of-birth": "Cairo, Egypt",
       "first-appearance": "Songs of the Veil #1",
       "publisher": "Mindforge Comics",
@@ -310,8 +366,14 @@
     "appearance": {
       "gender": "Female",
       "race": "Human",
-      "height": ["5'8", "173 cm"],
-      "weight": ["140 lb", "63 kg"],
+      "height": [
+        "5'8",
+        "173 cm"
+      ],
+      "weight": [
+        "140 lb",
+        "63 kg"
+      ],
       "eye-color": "Amber",
       "hair-color": "Black"
     },
@@ -328,7 +390,6 @@
     }
   },
   {
-    "response": "success",
     "id": "9",
     "name": "Synapse Knight",
     "powerstats": {
@@ -342,7 +403,9 @@
     "biography": {
       "full-name": "Arden Voss",
       "alter-egos": "None",
-      "aliases": ["The Focused One"],
+      "aliases": [
+        "The Focused One"
+      ],
       "place-of-birth": "Reykjavik, Iceland",
       "first-appearance": "Cognitive Wars #2",
       "publisher": "Mindforge Comics",
@@ -351,8 +414,14 @@
     "appearance": {
       "gender": "Male",
       "race": "Human",
-      "height": ["6'0", "183 cm"],
-      "weight": ["180 lb", "82 kg"],
+      "height": [
+        "6'0",
+        "183 cm"
+      ],
+      "weight": [
+        "180 lb",
+        "82 kg"
+      ],
       "eye-color": "Steel blue",
       "hair-color": "Dark brown"
     },
@@ -369,7 +438,6 @@
     }
   },
   {
-    "response": "success",
     "id": "10",
     "name": "Ghostline",
     "powerstats": {
@@ -383,7 +451,9 @@
     "biography": {
       "full-name": "Nova Wynn",
       "alter-egos": "None",
-      "aliases": ["The Digital Phantom"],
+      "aliases": [
+        "The Digital Phantom"
+      ],
       "place-of-birth": "Seattle, USA",
       "first-appearance": "Ethernetics #1",
       "publisher": "Mindforge Comics",
@@ -392,8 +462,14 @@
     "appearance": {
       "gender": "Female",
       "race": "Human (Digitally Altered)",
-      "height": ["5'6", "168 cm"],
-      "weight": ["125 lb", "57 kg"],
+      "height": [
+        "5'6",
+        "168 cm"
+      ],
+      "weight": [
+        "125 lb",
+        "57 kg"
+      ],
       "eye-color": "Glowing teal",
       "hair-color": "Dark brown"
     },
@@ -407,6 +483,56 @@
     },
     "image": {
       "url": "https://images.unsplash.com/photo-1711662171213-4141abec218f?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  },
+  {
+    "id": "11",
+    "name": "Neura Flux",
+    "powerstats": {
+      "intelligence": "95",
+      "strength": "60",
+      "speed": "70",
+      "durability": "65",
+      "power": "90",
+      "combat": "75"
+    },
+    "biography": {
+      "full-name": "Dr. Nova Elara",
+      "alter-egos": "The Mind Weaver",
+      "aliases": [
+        "Flux",
+        "Neura",
+        "Dr. Elara"
+      ],
+      "place-of-birth": "Stockholm, Sweden",
+      "first-appearance": "Neural Nexus #1 (2024)",
+      "publisher": "InnerVerse Studios",
+      "alignment": "good"
+    },
+    "appearance": {
+      "gender": "Female",
+      "race": "Human (Cyborg-enhanced)",
+      "height": [
+        "1.72 m",
+        "5'8"
+      ],
+      "weight": [
+        "62 kg",
+        "137 lbs"
+      ],
+      "eye-color": "Silver",
+      "hair-color": "Iridescent Purple"
+    },
+    "work": {
+      "occupation": "Neuropsychologist & AI Developer",
+      "base": "The Nexus Lab, hidden under Uppsala University"
+    },
+    "connections": {
+      "group-affiliation": "The Synaptic Order",
+      "relatives": "Unknown (rumored digital consciousness parents)"
+    },
+    "image": {
+      "url": "https://example.com/images/neura_flux.png"
     }
   }
 ]
