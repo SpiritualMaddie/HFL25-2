@@ -157,11 +157,10 @@ class HeroUI {
       print("Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i SuperHero API");
       print("******************************************************************************\n");
       
-      // Taking in search input from user TODO clean up
-      String input = stdin.readLineSync()?.trim() ?? "";
-      String heroName = inputUtils.capitalizeAllWords(input);
+      // Taking in search input from user
+      String heroName = inputUtils.capitalizeAllWords(stdin.readLineSync()?.trim() ?? "");
 
-      if(input.isNotEmpty){
+      if(heroName.isNotEmpty){
         // Fetch all heros and search hero based on user input
         var selectedHero = await dataManager.getHeroByNameApi(heroName);
 
