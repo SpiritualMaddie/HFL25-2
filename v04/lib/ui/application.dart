@@ -25,9 +25,10 @@ class Application{
       final String prompt = "Vad vill du göra?\n";
       List<String> options = ["1. Lägga till hjälte",
                               "2. Visa hjältar",
-                              "3. Sök hjälte - lokalt",
-                              "4. Sök hjälte - API",
-                              "5. Avsluta"];
+                              "3. Visa hjältar och skurkar",
+                              "4. Sök hjälte - lokalt",
+                              "5. Sök hjälte - API",
+                              "6. Avsluta"];
       Menu mainMenu = Menu(options: options, prompt: prompt);
 
       consoleUtils.logo();
@@ -39,9 +40,10 @@ class Application{
       switch(input){
         case "1": await heroUI.addHeroUI(); break;
         case "2": await heroUI.showHerosUI(); break;
-        case "3": await heroUI.searchHeroUI(); break;
-        case "4": await heroUI.searchHeroApiUI(); break;      
-        case "5": consoleUtils.endScreen(); break;      
+        case "3": await heroUI.showHerosAndVilliansUI(); break;
+        case "4": await heroUI.searchHeroUI(); break;
+        case "5": await heroUI.searchHeroApiUI(); break;      
+        case "6": consoleUtils.endScreen(); break;      
         default: consoleUtils.invalidChoice();
       }
     }

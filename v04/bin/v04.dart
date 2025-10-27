@@ -17,52 +17,54 @@ Future<void> main(List<String> arguments) async {
   final mockDataManager = MockDataManager();
   MockData mockData = MockData();
 
-  await mockDataManager.loadHeroesFromJsonToHeroesList();
+  await dataManager.loadHeroesFromJsonToHeroesList();
+
+  app.startMenu();
 
   //await mockData.loadMockHeroes(dataManager);
   //app.startMenu();
 
-  final testHero = HeroModel(
-  heroId: 0, // will be auto-updated in createHero()
-  name: "Neura Flux",
-  powerstats: PowerstatsModel(
-    intelligence: 95,
-    strength: 60,
-    speed: 70,
-    durability: 65,
-    power: 90,
-    combat: 75,
-  ),
-  biography: BiographyModel(
-    fullName: "Dr. Nova Elara",
-    alterEgos: "The Mind Weaver",
-    aliases: ["Flux", "Neura", "Dr. Elara"],
-    placeOfBirth: "Stockholm, Sweden",
-    firstAppearance: "Neural Nexus #1 (2024)",
-    publisher: "InnerVerse Studios",
-    alignment: "good",
-  ),
-  appearance: AppearanceModel(
-    gender: "Female",
-    race: "Human (Cyborg-enhanced)",
-    height: ["1.72 m", "5'8"],
-    weight: ["62 kg", "137 lbs"],
-    eyeColor: "Silver",
-    hairColor: "Iridescent Purple",
-  ),
-  work: WorkModel(
-    occupation: "Neuropsychologist & AI Developer",
-    base: "The Nexus Lab, hidden under Uppsala University",
-  ),
-  connections: ConnectionsModel(
-    groupAffiliation: "The Synaptic Order",
-    relatives: "Unknown (rumored digital consciousness parents)",
-  ),
-  image: ImageModel(
-    url: "https://example.com/images/neura_flux.png",
-  ),
-);
-  await mockDataManager.createHero(testHero);
+//   final testHero = HeroModel(
+//   heroId: 0, // will be auto-updated in createHero()
+//   name: "Neura Flux",
+//   powerstats: PowerstatsModel(
+//     intelligence: 95,
+//     strength: 60,
+//     speed: 70,
+//     durability: 65,
+//     power: 90,
+//     combat: 75,
+//   ),
+//   biography: BiographyModel(
+//     fullName: "Dr. Nova Elara",
+//     alterEgos: "The Mind Weaver",
+//     aliases: ["Flux", "Neura", "Dr. Elara"],
+//     placeOfBirth: "Stockholm, Sweden",
+//     firstAppearance: "Neural Nexus #1 (2024)",
+//     publisher: "InnerVerse Studios",
+//     alignment: "good",
+//   ),
+//   appearance: AppearanceModel(
+//     gender: "Female",
+//     race: "Human (Cyborg-enhanced)",
+//     height: ["1.72 m", "5'8"],
+//     weight: ["62 kg", "137 lbs"],
+//     eyeColor: "Silver",
+//     hairColor: "Iridescent Purple",
+//   ),
+//   work: WorkModel(
+//     occupation: "Neuropsychologist & AI Developer",
+//     base: "The Nexus Lab, hidden under Uppsala University",
+//   ),
+//   connections: ConnectionsModel(
+//     groupAffiliation: "The Synaptic Order",
+//     relatives: "Unknown (rumored digital consciousness parents)",
+//   ),
+//   image: ImageModel(
+//     url: "https://example.com/images/neura_flux.png",
+//   ),
+// );
+//   await mockDataManager.createHero(testHero);
 
-  await mockDataManager.updateJsonWithHeroesList();
+//   await mockDataManager.updateJsonWithHeroesList();
 }

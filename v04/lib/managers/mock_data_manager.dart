@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:v04/data/models/hero_model.dart';
-import 'package:v04/managers/hero_data_managing.dart';
+import 'package:v04/interfaces/hero_data_managing.dart';
 
 class MockDataManager implements HeroDataManaging {
   // Private constructor for Singleton
@@ -42,19 +42,6 @@ class MockDataManager implements HeroDataManaging {
     );
     _mockHeroesList.add(newHero);
     return hero;
-  }
-
-  @override
-  Future<List<HeroModel>> getAllHeroes() async {
-    return _mockHeroesList;
-  }
-
-  @override
-  Future<List<HeroModel>> getHeroByName(String heroName) async {
-    final search = heroName.toLowerCase();
-    return _mockHeroesList
-        .where((h) => h.name.toLowerCase().contains(search))
-        .toList();
   }
 
   // @override
@@ -172,6 +159,30 @@ class MockDataManager implements HeroDataManaging {
   @override
   Future<List<HeroModel>> getHeroByNameApi(String heroName) {
     // TODO: implement getHeroByNameApi
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<void> deleteHero(int id) {
+    // TODO: implement deleteHero
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<HeroModel>> getAllHeroesLocal() {
+    // TODO: implement getAllHeroesLocal
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<List<HeroModel>> getHeroByNameLocal(String heroName) {
+    // TODO: implement getHeroByNameLocal
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Map<String, List<HeroModel>>> sortedHeroesVillains() {
+    // TODO: implement sortedHeroesVillains
     throw UnimplementedError();
   }
 }

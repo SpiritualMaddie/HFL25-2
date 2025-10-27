@@ -69,7 +69,7 @@ class HeroUI {
     // Confirm and show new hero
     consoleUtils.clearConsole();
     print("💾 Hjälten är tillagd!\n");
-    var allHeroes = await dataManager.getAllHeroes();
+    var allHeroes = await dataManager.getAllHeroesLocal();
     var lastHeroAdded = allHeroes.last;
     print(lastHeroAdded.toString());
     print("\nTryck Enter för att fortsätta.");
@@ -80,10 +80,10 @@ class HeroUI {
   Future<void> showHerosUI() async{
     consoleUtils.clearConsole();
 
-    // Get all heros saved in list
+    // Get all heroes saved in list
     print("Alla hjältar i listan. Sorterat efter styrka (starkast först).");
     print("**************************************************************\n");
-    var allHeros = await dataManager.getAllHeroes();
+    var allHeros = await dataManager.getAllHeroesLocal();
 
     // Sort by strength
     allHeros.sort((a, b) =>
@@ -98,6 +98,44 @@ class HeroUI {
 
     print("Tryck Enter för att komma tillbaka till menyn");
     stdin.readLineSync();
+  }
+
+  // Function to show all the heroes and villians serperated
+  Future<void> showHerosAndVilliansUI() async{
+    consoleUtils.clearConsole();
+
+    // Get all heroes saved in list and print them seperated by alignment
+    print("Alla hjältar och skurkar i listan.");
+    print("************************************\n");
+    var allheroesAndVillians = await dataManager.sortedHeroesVillains();
+
+    print("=========================");
+    print("======= Hjältar =========");
+    print("=========================");
+    if(allheroesAndVillians["heroes"]?.isNotEmpty ?? false){
+      for(var hero in allheroesAndVillians["heroes"]!){
+        print("Id: ${hero.heroId}\t - ${hero.name}");
+      }
+    }
+    else{
+      print("\n ⚠️ Inga hjältar hittades.\n");
+    }
+
+    print("\n\n=========================");
+    print("======= Skurkar =========");
+    print("=========================");
+    if(allheroesAndVillians["villians"]?.isNotEmpty ?? false){
+      for(var villian in allheroesAndVillians["villians"]!){
+        print("Id: ${villian.heroId}\t - ${villian.name}");
+      }
+    }
+    else{
+      print("\n ⚠️ Inga skurkar hittades.\n");
+    }
+
+    print("Klicka Enter att gå vidare.");
+    stdin.readLineSync();
+    // TODO id input from user to see all info about certain hero or villian?
   }
 
   // Function to search for a hero in saved heroes
@@ -115,7 +153,7 @@ class HeroUI {
 
       if(input.isNotEmpty){
         // Fetch all heros and search hero based on user input
-        var selectedHero = await dataManager.getHeroByName(heroName);
+        var selectedHero = await dataManager.getHeroByNameLocal(heroName);
 
         if(selectedHero.isNotEmpty){
           // Print out all the heroes that match the search
