@@ -13,16 +13,15 @@ import 'package:v04/data/mock_data.dart';
 // TODO "reponse : success" in json when adding to the json
 Future<void> main(List<String> arguments) async {
   final app = Application();
-  final dataManager = HeroDataManager();
-  final mockDataManager = MockDataManager();
-  MockData mockData = MockData();
+  // final dataManager = HeroDataManager();
+  // final mockDataManager = MockDataManager();
+  // MockData mockData = MockData();
 
-  await dataManager.loadHeroesFromJsonToHeroesList();
+  await app.loadHeroesFromLocalJson();
 
   app.startMenu();
 
   //await mockData.loadMockHeroes(dataManager);
-  //app.startMenu();
 
 //   final testHero = HeroModel(
 //   heroId: 0, // will be auto-updated in createHero()

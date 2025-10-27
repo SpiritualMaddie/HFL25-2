@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:v04/managers/hero_data_manager.dart';
 import 'package:v04/ui/hero_ui.dart';
 import 'package:v04/utils/console_utils.dart';
 import 'package:v04/utils/menu.dart';
@@ -14,10 +15,12 @@ class Application{
   // Public accessor of the Singleton
   factory Application() => _instance;
 
+  final consoleUtils = ConsoleUtils();
+  final heroUI = HeroUI();
+  final dataManager = HeroDataManager();
+
   // Function to run menu
   Future<void> startMenu() async {
-    final consoleUtils = ConsoleUtils();
-    final heroUI = HeroUI();
 
     while (true) {
       consoleUtils.clearConsole();
@@ -46,6 +49,20 @@ class Application{
         case "6": consoleUtils.endScreen(); break;      
         default: consoleUtils.invalidChoice();
       }
+    }
+  }
+
+  Future<void> loadHeroesFromLocalJson() async {
+      try {
+      final count = await dataManager.loadHeroesFromJsonToHeroesList();
+
+      print("✅ Laddade $count hjältar och skurkar från lokal JSON.");
+      sleep(Duration(seconds: 2)); // TODO spinner?
+
+      // print("Första på listan:\n${_heroesList.first}");
+      // print("Sista på listan:\n${_heroesList.last}");
+    } catch (e) {
+      print("❌ Error: $e");
     }
   }
 }

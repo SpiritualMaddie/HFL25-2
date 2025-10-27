@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:dotenv/dotenv.dart' as dotenv;
-import 'package:http/http.dart' as http;
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/data/repositories/super_hero_api_repository.dart';
 import 'package:v04/data/repositories/local_file_repository.dart';
@@ -21,11 +18,9 @@ class HeroDataManager implements HeroDataManaging{
   // List of heroes
   final List<HeroModel> _heroesList = [];
 
-  final LocalFileRepository localFileRepo = LocalFileRepository(localFilePath: "lib/data/hero_mock_data.json");
+  //final LocalFileRepository localFileRepo = LocalFileRepository(localFilePath: "lib/data/jsondata/super_hero_json.json");
+  final LocalFileRepository localFileRepo = LocalFileRepository(localFilePath: "lib/data/jsondata/hero_mock_data.json");
   final SuperHeroApiRepository apiHeroRepo = SuperHeroApiRepository();
-
-  // Env
-  final env = dotenv.DotEnv()..load();
   
   // TODO thinks it works
   @override
@@ -59,13 +54,11 @@ class HeroDataManager implements HeroDataManaging{
     print("💾 Hjälte/skurk sparad: \n${hero.toString()}");
   }
   
-  // TODO better error handling
   @override
   Future<List<HeroModel>> getAllHeroesLocal() async {
     return _heroesList;
   }
   
-  // TODO better error handling
   @override
   Future<List<HeroModel>> getHeroByNameLocal(String heroName) async {
     final search = heroName.toLowerCase();
@@ -74,20 +67,16 @@ class HeroDataManager implements HeroDataManaging{
         .toList();
   }
   
-  // TODO better error handling
   @override
   Future<List<HeroModel>> getHeroByNameApi(String heroName) async {
     return apiHeroRepo.getHeroByName(heroName);
   }
   
-  // Delete hero prepered function 
-  // TODO better error handling
   @override
   Future<void> deleteHero(int id) async {
     _heroesList.removeWhere((h) => h.heroId == id);
   }
   
-  // TODO try it
   @override
   Future<Map<String, List<HeroModel>>> sortedHeroesVillains() async {
     final heroes = _heroesList
@@ -104,21 +93,18 @@ class HeroDataManager implements HeroDataManaging{
     };
   }
   
-  // TODO is this try catch redudant?
   @override
-  Future<void> loadHeroesFromJsonToHeroesList() async {
+  Future<int> loadHeroesFromJsonToHeroesList() async {
     try {
       final parsedJsonHeroes = await localFileRepo.readLocalHeroFile();
 
-      _heroesList.clear();
-      _heroesList.addAll(parsedJsonHeroes);
+      _heroesList
+        ..clear()
+        ..addAll(parsedJsonHeroes);
 
-      print("✅ Laddade ${_heroesList.length} hjältar och skurkar från lokal JSON.");
-      sleep(Duration(seconds: 2)); // TODO spinner?
-      // print("Första på listan:\n${_heroesList.first}");
-      // print("Sista på listan:\n${_heroesList.last}");
+      return _heroesList.length;
     } catch (e) {
-      print("❌ Misslyckades att ladda hjältar och skurkar: $e");
+      throw Exception("❌ Misslyckades att ladda hjältar och skurkar: $e");
     }
   }
   

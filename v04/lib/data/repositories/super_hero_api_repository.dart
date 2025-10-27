@@ -8,12 +8,12 @@ import 'package:v04/interfaces/isuper_hero_api_repository.dart';
 class SuperHeroApiRepository implements ISuperHeroApiRepository{
 
   // Env
-  final env = dotenv.DotEnv()..load();
+  final _env = dotenv.DotEnv()..load();
   
   @override
   Future<List<HeroModel>> getHeroByName(String heroName) async {
 
-    final baseUrl = env["API_URL_WITH_KEY"];
+    final baseUrl = _env["API_URL_WITH_KEY"];
 
     if(baseUrl == null || baseUrl.isEmpty){
       throw Exception("❌ Saknas 'API_URL_WITH_KEY' i '.env'");
@@ -26,8 +26,9 @@ class SuperHeroApiRepository implements ISuperHeroApiRepository{
       if(response.statusCode == 200){
         final jsonBody = jsonDecode(response.body);
 
+        // TODO change error handling for more statuscodes and if repsonse != success
         if(jsonBody == null || jsonBody["response"] != "success"){
-          print("⚠️ Inga hjältar eller skurkar hittades för: '$heroName'.");
+          //print("⚠️ Inga hjältar eller skurkar hittades för: '$heroName'.");
           return [];
         }
 

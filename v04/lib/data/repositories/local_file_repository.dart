@@ -10,10 +10,8 @@ class LocalFileRepository implements ILocalFileRepository {
 
   LocalFileRepository({required this.localFilePath});
 
-  // Env
-  final env = dotenv.DotEnv()..load();
-
-  // Path to json "lib/data/hero_mock_data.json"
+  // Path to mock json "lib/data/jsondata/hero_mock_data.json"
+  // Path to json "lib/data/jsondata/super_hero_json.json"
 
   // Reads the local file in the localFilePath and returns a list of HeroModel objects based on whats in the local json file
   @override
