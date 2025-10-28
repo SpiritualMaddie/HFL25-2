@@ -17,26 +17,14 @@ class PowerstatsModel {
 
   // Deserialization
   factory PowerstatsModel.fromJson(Map<String, dynamic> json){
-    List<String> missingFields = [];
-
-    if(json["intelligence"] == null) missingFields.add("intelligence");
-    if(json["strength"] == null) missingFields.add("strength");
-    if(json["speed"] == null) missingFields.add("speed");
-    if(json["durability"] == null) missingFields.add("durability");
-    if(json["power"] == null) missingFields.add("power");
-    if(json["combat"] == null) missingFields.add("combat");
-
-    if(missingFields.isNotEmpty){
-        throw FormatException("Missing required fields: ${missingFields.join(", ")}");
-    }
 
     return PowerstatsModel(
-        intelligence : int.parse(json["intelligence"]),
-        strength : int.parse(json["strength"]),
-        speed : int.parse(json["speed"]),
-        durability : int.parse(json["durability"]),
-        power : int.parse(json["power"]),
-        combat : int.parse(json["combat"])
+      intelligence: _safeParse(json["intelligence"]),
+      strength: _safeParse(json["strength"]),
+      speed: _safeParse(json["speed"]),
+      durability: _safeParse(json["durability"]),
+      power: _safeParse(json["power"]),
+      combat: _safeParse(json["combat"]),
     );
   }
 
@@ -63,5 +51,10 @@ Krafter:
   Kraft:        $power
   Stridsvärde:  $combat
 """);
+  }
+
+  static int _safeParse(dynamic value) {
+    if (value == null || value == "null" || value == "") return 0;
+    return int.tryParse(value.toString()) ?? 0;
   }
 }
