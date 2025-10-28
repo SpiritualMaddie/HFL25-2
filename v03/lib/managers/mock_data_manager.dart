@@ -58,12 +58,6 @@ class MockDataManager implements HeroDataManaging{
   }
   
   // @override
-  // Future<void> deleteHero(int id) async {
-  //   _mockHeroesList.removeWhere((h) => h.heroId == id);
-  // }
-  
-  // TODO check if works as expected
-  // @override
   // Future<HeroModel> updateHero(HeroModel updatedHero) async {
   //   final index = _mockHeroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
   //   if (index == -1) {
@@ -72,76 +66,22 @@ class MockDataManager implements HeroDataManaging{
   //   _mockHeroesList[index] = updatedHero;
   //   return updatedHero;
   // }
-  
-  // @override
-  // Future<HeroModel?> getHeroById(int id) async {
-  //   return _mockHeroesList.firstWhere((h) => h.heroId == id, orElse: () => null);
-  // }
 
-Future<void> loadHeroesFromJsonToHeroesList() async {
-  try {
-    final file = File(mockDataPath);
-    final contents = await file.readAsString();
-    final List<dynamic> jsonData = jsonDecode(contents);
+  Future<void> loadHeroesFromJsonToHeroesList() async {
+    try {
+      final file = File(mockDataPath);
+      final contents = await file.readAsString();
+      final List<dynamic> jsonData = jsonDecode(contents);
 
-    _mockHeroesList.clear();
-    _mockHeroesList.addAll(
-      jsonData.map((h) => HeroModel.fromJson(h)).toList(),
-    );
-
-    print("✅ Loaded ${_mockHeroesList.length} heroes from JSON.");
-    //print("First hero:\n${_mockHeroesList.first}");
-  } catch (e) {
-    print("❌ Failed to load heroes: $e");
-  }
-}
-
-// TODO remove when safe
-Future<void> syncListAndJsonData() async {
-  try {
-    final file = File(mockDataPath);
-
-    if (!await file.exists()) {
-      print("⚠️ JSON file not found at $mockDataPath.");
-      return;
-    }
-
-    // 
-    final contents = await file.readAsString();
-    final List<dynamic> jsonData = jsonDecode(contents);
-
-    if(_mockHeroesList.isEmpty){
       _mockHeroesList.clear();
       _mockHeroesList.addAll(
         jsonData.map((h) => HeroModel.fromJson(h)).toList(),
       );
+
+      print("✅ Loaded ${_mockHeroesList.length} heroes from JSON.");
+      //print("First hero:\n${_mockHeroesList.first}");
+    } catch (e) {
+      print("❌ Failed to load heroes: $e");
     }
-
-    // Convert jsonData -> HeroModel list
-    final List<HeroModel> loadedHeroes = jsonData
-        .map((item) => HeroModel.fromJson(item as Map<String, dynamic>))
-        .toList();
-
-    // Compare with in-memory list and if not matching updating JSON to match in-memory list
-    if (_mockHeroesList.length != loadedHeroes.length) {
-      print("🔄 Updating JSON from in-memory list (${loadedHeroes.length} heroes).");
-      // Convert the mockHeroesList to the json so that json reflects in-memory list
-    } else {
-      print("✅ List already up-to-date with JSON (${_mockHeroesList.length} heroes).");
-    }
-
-  } catch (e) {
-    print("❌ Failed to sync heroes: $e");
   }
-}
-
-// Use append
-Future<void> saveHeroToJson(HeroModel newHero) async {
-  final file = File(mockDataPath);
-  final jsonData = newHero.toJson();
-  await file.writeAsString(jsonEncode(jsonData), flush: true, mode: FileMode.append);
-  print("💾 Hero saved to file.");
-}
-
-
 }
