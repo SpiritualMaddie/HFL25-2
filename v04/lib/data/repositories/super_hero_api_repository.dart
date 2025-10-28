@@ -28,7 +28,6 @@ class SuperHeroApiRepository implements ISuperHeroApiRepository{
 
         // TODO change error handling for more statuscodes and if repsonse != success
         if(jsonBody == null || jsonBody["response"] != "success"){
-          print("⚠️ Inga hjältar eller skurkar hittades för: '$heroName'.");
           return [];
         }
 

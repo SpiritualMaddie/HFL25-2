@@ -24,22 +24,22 @@ class Application {
 
       final String prompt = "Vad vill du göra?\n";
       List<String> options = [
-        "1. Lägga till hjälte/skurk",
+        "1. Lägga till - hjälte/skurk",
         "2. Visa alla - starkast först",
-        "3. Visa hjältar & skurkar (+ delete)",
-        "4. Sök lokalt",
-        "5. Sök i API",
-        "6. Spara alla - lokalt",
+        "3. Visa alla - hjältar & skurkar",
+        "4. Sök - lokalt",
+        "5. Sök - API",
+        "6. Spara manuellt - lokalt",
         "7. Avsluta",
       ];
       Menu mainMenu = Menu(options: options, prompt: prompt);
 
       consoleUtils.logo();
       print("""
-===========================""");
+======================================================""");
       print(mainMenu);
       print("""
-===========================""");
+======================================================""");
 
       // Lets user choose menu choice
       var input = stdin.readLineSync();

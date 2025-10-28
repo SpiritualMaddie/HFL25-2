@@ -47,7 +47,7 @@ final getValidInt = GetValidInt();
     String publisher = inputUtils.promptNotEmpty("Utgivare:");
     String alignment = inputUtils.promptFromOptions(
       "Moral/alignment:",
-      ["good", "neutral", "evil", "chaotic good", "neutral good"],
+      ["good", "neutral", "bad"],
     );
 
     return BiographyModel(

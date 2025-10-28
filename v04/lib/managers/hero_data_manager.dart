@@ -92,9 +92,14 @@ class HeroDataManager implements HeroDataManaging{
         .where((v) => v.biography.alignment.toLowerCase() == "bad")
         .toList();
 
+    final neutrals = _heroesList
+        .where((v) => v.biography.alignment.toLowerCase() == "neutral")
+        .toList();
+    
     return {
       "heroes": heroes,
       "villains": villains,
+      "neutrals" : neutrals
     };
   }
   
