@@ -1,6 +1,7 @@
 import 'dart:io';
 class ConsoleUtils {
 
+  // Function to print Logo/ASCII art of a SuperHero
   void logo(){
     print(r"""
              .=.,

@@ -84,7 +84,6 @@ ${biography.toString()}
 ${appearance.toString()}
 ${work?.toString()}
 ${connections?.toString()}
-${image?.toString()}
 =====================================================
 """);
   }

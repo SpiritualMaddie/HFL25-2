@@ -1,7 +1,6 @@
 import 'dart:convert';
-
-import 'package:dotenv/dotenv.dart' as dotenv;
 import 'package:http/http.dart' as http;
+import 'package:dotenv/dotenv.dart' as dotenv;
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/interfaces/isuper_hero_api_repository.dart';
 
@@ -10,6 +9,7 @@ class SuperHeroApiRepository implements ISuperHeroApiRepository{
   // Env
   final _env = dotenv.DotEnv()..load();
   
+  // Function to get hero/villian by name from the API https://superheroapi.com/ that reads from the .env for the API key
   @override
   Future<List<HeroModel>> getHeroByName(String heroName) async {
 
@@ -28,7 +28,7 @@ class SuperHeroApiRepository implements ISuperHeroApiRepository{
 
         // TODO change error handling for more statuscodes and if repsonse != success
         if(jsonBody == null || jsonBody["response"] != "success"){
-          //print("⚠️ Inga hjältar eller skurkar hittades för: '$heroName'.");
+          print("⚠️ Inga hjältar eller skurkar hittades för: '$heroName'.");
           return [];
         }
 
@@ -42,7 +42,7 @@ class SuperHeroApiRepository implements ISuperHeroApiRepository{
         return [];
       }
     } catch (e) {
-      print("💥 Error i hämtande av hjälte/skurk: $e");
+      print("❌ Error i hämtande av hjälte/skurk: $e");
       return [];
     }
   }

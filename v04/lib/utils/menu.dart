@@ -1,4 +1,3 @@
-
 // Class to create a customizable menu in a CLI with multiple options
 class Menu{
 

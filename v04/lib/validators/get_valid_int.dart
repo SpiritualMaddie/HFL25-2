@@ -17,16 +17,40 @@ class GetValidInt {
       try {
         int valueInt = int.parse(input);
         if (valueInt < 0) {
-          stdout.writeln("Siffran kan inte vara negativt. Försök igen.");
+          stdout.writeln("❗ Siffran kan inte vara negativt. Försök igen.");
           continue;
         }
         if (valueInt > 100) {
-          stdout.writeln("Siffran kan inte vara över 100. Försök igen.");
+          stdout.writeln("❗ Siffran kan inte vara över 100. Försök igen.");
           continue;
         }
         return valueInt;
       } on FormatException {
-        stdout.writeln("Ogiltigt värde. Ange ett heltal.");
+        stdout.writeln("❌ Ogiltigt värde. Ange ett heltal.");
+      }
+    }
+  }
+
+  // Validating input as int looping unless correct
+  int getValidIntWithLoop(String prompt) {
+    while (true) {
+      stdout.writeln(prompt);
+      String input = stdin.readLineSync()?.trim() ?? "";
+
+      if (input.isEmpty) {
+        stdout.writeln("❗ Ops, du måste skriva något.");
+        continue;
+      }
+
+      try {
+        int valueInt = int.parse(input);
+        if (valueInt < 1) {
+          stdout.writeln("❗ Siffran kan inte vara noll eller negativt. Försök igen.");
+          continue;
+        }
+        return valueInt;
+      } on FormatException {
+        stdout.writeln("❌ Ogiltigt värde. Ange ett heltal.");
       }
     }
   }

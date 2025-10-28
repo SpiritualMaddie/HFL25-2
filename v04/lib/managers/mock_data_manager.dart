@@ -1,188 +1,150 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/interfaces/hero_data_managing.dart';
+import 'package:v04/data/repositories/local_file_repository.dart';
+import 'package:v04/data/repositories/super_hero_api_repository.dart';
 
-class MockDataManager implements HeroDataManaging {
+class HeroDataManager implements HeroDataManaging{
+
   // Private constructor for Singleton
-  MockDataManager._internal();
+  HeroDataManager._internal();
 
   // Single static instance
-  static final MockDataManager _instance = MockDataManager._internal();
+  static final HeroDataManager _instance = HeroDataManager._internal();
 
   // Public accessor of the Singleton
-  factory MockDataManager() => _instance;
+  factory HeroDataManager() => _instance;
 
   // List of heroes
-  final List<HeroModel> _mockHeroesList = [];
+  final List<HeroModel> _heroesList = [];
 
-  // Path to json (can be switched to API uri or db)
-  // final uri = Uri.parse("http://");
-  String mockDataPath = "lib/data/hero_mock_data.json";
-
+  final LocalFileRepository localFileRepoMock = LocalFileRepository(localFilePath: "lib/data/jsondata/hero_mock_data.json");
+  final SuperHeroApiRepository apiHeroRepo = SuperHeroApiRepository();
+  
+  // Function to create new hero/villian with check for if the name already exist and wont create a duplicate
   @override
-  Future<HeroModel> createHero(HeroModel hero) async {
-    // Auto-increment ID adding +1 from the highest existing ID TODO adding id higher than the highest on record
-    int newId = _mockHeroesList.isEmpty
-        ? 1
-        : _mockHeroesList.map((h) => h.heroId).reduce((a, b) => a > b ? a : b) +
-              1;
-    // _mockHeroesList.last.heroId + 1; - Auto-increment ID based on the last hero in the list
+  Future<HeroModel?> createHero(HeroModel hero) async {
 
-    final newHero = HeroModel(
-      heroId: newId,
-      name: hero.name,
-      powerstats: hero.powerstats,
-      biography: hero.biography,
-      appearance: hero.appearance,
-      image: hero.image,
-      work: hero.work,
-      connections: hero.connections,
-    );
-    _mockHeroesList.add(newHero);
-    return hero;
+    try {
+      final heroAlreadyExists = _heroesList.any((h) => h.name.toLowerCase() == hero.name.toLowerCase());
+
+      if(heroAlreadyExists){     
+        return null;
+      }
+
+      int newId = _heroesList.isEmpty 
+                  ? 1 
+                  : _heroesList.last.heroId + 1; // Auto-increment ID based on the last hero in the list
+
+      final newHero = HeroModel(
+        heroId: newId,
+        name: hero.name,
+        powerstats: hero.powerstats,
+        biography: hero.biography,
+        appearance: hero.appearance,
+        image: hero.image,
+        work: hero.work,
+        connections: hero.connections,
+      );
+      _heroesList.add(newHero);
+
+      return newHero;      
+    } catch (e) {
+        throw Exception("❌ Misslyckades att spara hjälte/skurk: $e");
+    }
+
+  }
+  
+  // Function to get all heroes/villians in the local list _heroesList
+  @override
+  Future<List<HeroModel>> getAllHeroesLocal() async {
+    return _heroesList;
+  }
+  
+  // Function to get hero/villian by name in the local list _heroesList
+  @override
+  Future<List<HeroModel>> getHeroByNameLocal(String heroName) async {
+    final search = heroName.toLowerCase();
+    return _heroesList
+        .where((h) => h.name.toLowerCase().contains(search))
+        .toList();
+  }
+  
+  // Function to get hero/villian by name from the api https://superheroapi.com/
+  @override
+  Future<List<HeroModel>> getHeroByNameApi(String heroName) async {
+    return apiHeroRepo.getHeroByName(heroName);
+  }
+  
+  // Function to delete hero/villian from local list _heroesList
+  @override
+  Future<void> deleteHero(int id) async {
+    _heroesList.removeWhere((h) => h.heroId == id);
+  }
+  
+  // Function to sort heroes and villians ans return Map with them sorted
+  @override
+  Future<Map<String, List<HeroModel>>> sortedHeroesVillains() async {
+    final heroes = _heroesList
+        .where((h) => h.biography.alignment.toLowerCase() == "good")
+        .toList();
+
+    final villains = _heroesList
+        .where((v) => v.biography.alignment.toLowerCase() == "bad")
+        .toList();
+
+    return {
+      "heroes": heroes,
+      "villains": villains,
+    };
+  }
+  
+  // Function to load heroes/villians from the local json file to the _heroesList
+  @override
+  Future<int> loadHeroesFromJsonToHeroesList() async {
+    try {
+      final parsedJsonHeroes = await localFileRepoMock.readLocalHeroFile();
+
+      _heroesList
+        ..clear()
+        ..addAll(parsedJsonHeroes);
+
+      return _heroesList.length;
+    } catch (e) {
+      throw Exception("❌ Misslyckades att ladda hjältar och skurkar: $e");
+    }
+  }
+  
+  // Function to get a hero/villian by Id in the local list _heroesList
+  @override
+  Future<HeroModel?> getHeroByIdLocal(int id) async {
+    try {
+      var hero = _heroesList.firstWhere((h) => h.heroId == id);
+      return hero;
+    } catch (_) {
+      return null;
+    }
+  }
+  
+  // Function to update the local json file with the local list _heroesList
+  @override
+  Future<void> updateJsonWithHeroesList() async {
+    try {
+      await localFileRepoMock.updateLocalHeroFile(_heroesList);
+    } catch (e) {
+      throw Exception("❌ Misslyckades att spara hjältar och skurkar: $e");
+    }
   }
 
-  // @override
-  // Future<void> deleteHero(int id) async {
-  //   _mockHeroesList.removeWhere((h) => h.heroId == id);
-  // }
 
-  // TODO check if works as expected
+  // Update hero prepered function
   // @override
   // Future<HeroModel> updateHero(HeroModel updatedHero) async {
-  //   final index = _mockHeroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
+  //   final index = _heroesList.indexWhere((h) => h.heroId == updatedHero.heroId);
   //   if (index == -1) {
   //     throw Exception("Hero with ID ${updatedHero.heroId} not found");
   //   }
-  //   _mockHeroesList[index] = updatedHero;
+  //   _heroesList[index] = updatedHero;
   //   return updatedHero;
   // }
 
-  // @override
-  // Future<HeroModel?> getHeroById(int id) async {
-  //   return _mockHeroesList.firstWhere((h) => h.heroId == id, orElse: () => null);
-  // }
-
-  // Pretty sure it works
-  Future<void> loadHeroesFromJsonToHeroesList() async {
-    try {
-      print("final file = File(mockDataPath);");
-      final file = File(mockDataPath);
-      print("final contents = await file.readAsString();");
-      final contents = await file.readAsString();
-      print("final List<dynamic> jsonData = jsonDecode(contents);");
-      final List<dynamic> jsonData = jsonDecode(contents);
-
-      print("_mockHeroesList.clear();");
-      _mockHeroesList.clear();
-      print("_mockHeroesList.addAll");
-      _mockHeroesList.addAll(
-        jsonData.map((h) => HeroModel.fromJson(h)).toList(),
-      );
-
-      print("✅ Loaded ${_mockHeroesList.length} heroes from JSON.");
-      print("First hero:\n${_mockHeroesList.first}");
-      print("Last hero:\n${_mockHeroesList.last}");
-    } catch (e) {
-      print("❌ Failed to load heroes: $e");
-    }
-  }
-
-  // TODO remove when safe
-  Future<void> syncListAndJsonData() async {
-    try {
-      final file = File(mockDataPath);
-
-      if (!await file.exists()) {
-        print("⚠️ JSON file not found at $mockDataPath.");
-        return;
-      }
-
-      //
-      final contents = await file.readAsString();
-      final List<dynamic> jsonData = jsonDecode(contents);
-
-      if (_mockHeroesList.isEmpty) {
-        _mockHeroesList.clear();
-        _mockHeroesList.addAll(
-          jsonData.map((h) => HeroModel.fromJson(h)).toList(),
-        );
-      }
-
-      // Convert jsonData -> HeroModel list
-      final List<HeroModel> loadedHeroes = jsonData
-          .map((item) => HeroModel.fromJson(item as Map<String, dynamic>))
-          .toList();
-
-      // Compare with in-memory list and if not matching updating JSON to match in-memory list
-      if (_mockHeroesList.length != loadedHeroes.length) {
-        print(
-          "🔄 Updating JSON from in-memory list (${loadedHeroes.length} heroes).",
-        );
-        // Convert the mockHeroesList to the json so that json reflects in-memory list
-      } else {
-        print(
-          "✅ List already up-to-date with JSON (${_mockHeroesList.length} heroes).",
-        );
-      }
-    } catch (e) {
-      print("❌ Failed to sync heroes: $e");
-    }
-  }
-
-  // Use append
-  Future<void> saveHeroToJson(HeroModel newHero) async {
-    final file = File(mockDataPath);
-    final jsonData = newHero.toJson();
-
-    await file.writeAsString(
-      jsonEncode(jsonData),
-      flush: true,
-      mode: FileMode.append,
-    );
-    print("💾 Hero saved to file.");
-  }
-
-  Future<void> updateJsonWithHeroesList() async {
-    final file = File(mockDataPath);
-
-    await file.writeAsString(
-      jsonEncode(_mockHeroesList),
-      flush: true,
-      mode: FileMode.write,
-    );
-    print("💾 Heroes saved to file.");
-  }
-
-  @override
-  Future<List<HeroModel>> getHeroByNameApi(String heroName) {
-    // TODO: implement getHeroByNameApi
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<void> deleteHero(int id) {
-    // TODO: implement deleteHero
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<List<HeroModel>> getAllHeroesLocal() {
-    // TODO: implement getAllHeroesLocal
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<List<HeroModel>> getHeroByNameLocal(String heroName) {
-    // TODO: implement getHeroByNameLocal
-    throw UnimplementedError();
-  }
-  
-  @override
-  Future<Map<String, List<HeroModel>>> sortedHeroesVillains() {
-    // TODO: implement sortedHeroesVillains
-    throw UnimplementedError();
-  }
 }

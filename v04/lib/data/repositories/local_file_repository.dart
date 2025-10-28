@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:dotenv/dotenv.dart' as dotenv;
+import 'dart:convert';
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/interfaces/ilocal_file_repository.dart';
 
@@ -9,9 +7,6 @@ class LocalFileRepository implements ILocalFileRepository {
   final String localFilePath;
 
   LocalFileRepository({required this.localFilePath});
-
-  // Path to mock json "lib/data/jsondata/hero_mock_data.json"
-  // Path to json "lib/data/jsondata/super_hero_json.json"
 
   // Reads the local file in the localFilePath and returns a list of HeroModel objects based on whats in the local json file
   @override
@@ -48,8 +43,6 @@ class LocalFileRepository implements ILocalFileRepository {
         flush: true,
         mode: FileMode.write,
       );
-
-      print("💾 Hjältar och skurkar sparade.");
     } catch (e, st) {
       print("❌ Misslyckades att spara hjältar och skurkar: $e");
       print("Stack trace: $st");
