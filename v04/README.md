@@ -402,7 +402,7 @@ final repo = SuperHeroApiRepository(
 ## Author
 
 **Madde** - [GitHub](https://github.com/SpiritualMaddie)  
-ReadMe created with help from ClaudeAI (https://claude.ai/) for a cleaner, more structured layout
+ReadMe created with help from [ClaudeAI](https://claude.ai/) for a cleaner, more structured layout
 
 Course: Hybrid Development with Flutter, Dart module (v04 - Final Assignment)  
 Date: October 2025
