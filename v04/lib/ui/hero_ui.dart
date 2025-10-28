@@ -183,7 +183,6 @@ Id: ${hero.heroId} \t${hero.name}
       }
       else{
         print("❗ Ops, id:et finns inte, försök igen.");
-        // sleep(Duration(seconds: 2)); // TODO remove if not needed
         continue;
       }
     }
@@ -250,7 +249,7 @@ Id: ${hero.heroId} \t${hero.name}
 
       // Promt to user
       print(
-        "Skriv ett namn (eller en bokstav) på en hjälte/skurk \noch se om dom finns i SuperHero API",
+        "Skriv ett namn på en hjälte/skurk \noch se om dom finns i SuperHero API",
       );
       print(
         "======================================================\n",
@@ -271,7 +270,7 @@ Id: ${hero.heroId} \t${hero.name}
             print(hero.toString());
           }
 
-          // Check if user wants to do new search
+          //Check if user wants to do new search
           print("Vill du göra en ny sökning? (ja/nej)");
           while (true) {
             var userInput = stdin.readLineSync()?.trim().toLowerCase() ?? "";

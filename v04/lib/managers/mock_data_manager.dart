@@ -1,24 +1,30 @@
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/interfaces/hero_data_managing.dart';
+import 'package:v04/data/factories/http_client_factory.dart';
 import 'package:v04/data/repositories/local_file_repository.dart';
 import 'package:v04/data/repositories/super_hero_api_repository.dart';
 
-class HeroDataManager implements HeroDataManaging{
-
-  // Private constructor for Singleton
-  HeroDataManager._internal();
-
-  // Single static instance
-  static final HeroDataManager _instance = HeroDataManager._internal();
-
-  // Public accessor of the Singleton
-  factory HeroDataManager() => _instance;
-
-  // List of heroes
+class MockHeroDataManager implements HeroDataManaging{
+  static final clientFactory = HttpClientFactory();
+  final SuperHeroApiRepository apiHeroRepo;
+  final LocalFileRepository localFileRepoMock = LocalFileRepository(
+    localFilePath: "lib/data/jsondata/hero_mock_data.json"
+  );
   final List<HeroModel> _heroesList = [];
 
-  final LocalFileRepository localFileRepoMock = LocalFileRepository(localFilePath: "lib/data/jsondata/hero_mock_data.json");
-  final SuperHeroApiRepository apiHeroRepo = SuperHeroApiRepository();
+  // Private constructor for Singleton
+  MockHeroDataManager._internal({required this.apiHeroRepo});
+
+  // Single static instance
+  static MockHeroDataManager? _instance;
+
+  // Factory only creates once
+  factory MockHeroDataManager({SuperHeroApiRepository? apiRepo}){
+    _instance ??= MockHeroDataManager._internal(
+      apiHeroRepo: apiRepo ?? SuperHeroApiRepository(clientFactory: clientFactory),
+    );
+    return _instance!;
+  }
   
   // Function to create new hero/villian with check for if the name already exist and wont create a duplicate
   @override

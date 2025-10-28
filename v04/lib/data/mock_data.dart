@@ -417,8 +417,7 @@ class MockData {
     for(final hero in heroes){
       await dataManager.createHero(hero);
     }
-
-    // TODO adding spinner?
+    
     print("✅ Loaded ${heroes.length} mock heroes into HeroDataManager!");
     sleep(Duration(seconds: 3));
   }
