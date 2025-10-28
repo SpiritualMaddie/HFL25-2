@@ -53,9 +53,9 @@ class PowerstatsModel {
   @override
   String toString() {
     return ("""
-------------------------------------------------
+-----------------------------------------------------
 Krafter:
-------------------------------------------------
+-----------------------------------------------------
   Intelligens:  $intelligence
   Styrka:       $strength
   Snabbhet:     $speed

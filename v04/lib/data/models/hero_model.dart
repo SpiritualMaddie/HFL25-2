@@ -76,7 +76,7 @@ class HeroModel {
   @override
   String toString() {
     return ("""
-=====================================================
+======================================================
 Id:     $heroId
 Namn:   $name
 ${powerstats.toString()}
@@ -84,7 +84,8 @@ ${biography.toString()}
 ${appearance.toString()}
 ${work?.toString()}
 ${connections?.toString()}
-=====================================================
+${image?.toString()}
+======================================================
 """);
   }
 }

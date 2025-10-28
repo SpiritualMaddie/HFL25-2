@@ -25,7 +25,7 @@ class HeroUI {
   Future<void> addHeroUI() async {
     consoleUtils.clearConsole();
     print("Lägg till hjälte");
-    print("******************\n");
+    print("======================================================\n");
 
     // Ask for name
     final heroName = inputUtils.capitalizeAllWords(
@@ -87,8 +87,8 @@ class HeroUI {
     consoleUtils.clearConsole();
 
     // Get all heroes saved in list
-    print("Alla hjältar i listan. Sorterat efter styrka (starkast först).");
-    print("**************************************************************\n");
+    print("Alla hjältar i listan. \nSorterat efter styrka (starkast först).");
+    print("======================================================\n");
     var allHeros = await dataManager.getAllHeroesLocal();
 
     // Sort by strength
@@ -98,7 +98,7 @@ class HeroUI {
 
     // Print all
     for (var hero in allHeros) {
-      print("---------------------");
+      print("======================================================");
       stdout.writeln("${allHeros.indexOf(hero) + 1}. ");
       print(hero.toString());
     }
@@ -115,8 +115,12 @@ class HeroUI {
     var all = await dataManager.sortedHeroesVillains();
     printSortedHeroesVillainsList(all["heroes"] ?? [], "Hjältar");
     printSortedHeroesVillainsList(all["villains"] ?? [], "Skurkar");
+    
+    letsUserChooseDeleteOrStartMenu();
+  }
 
-    // Let the user choose to delete a hero or villian or go back to start menu
+  // Function to let user choose to delete a chosen hero/villian based on id or go back to start menu
+  Future<void> letsUserChooseDeleteOrStartMenu() async{
     while (true) {
       print(
         "Skriv 'd' om du vill ta bort en hjälte/skurk \neller 'b' om du vill gå tillbaka till startmenyn: ",
@@ -128,17 +132,16 @@ class HeroUI {
       } else if (input == "d") {
         await deleteHeroUI();
       }else{
-        print("❗ Ogiltigt val. Försök igen.\n");
+        consoleUtils.invalidChoice();
         continue;
       }
     }
   }
-
   // Function to handle UI for printing Sorted Heroes and Villains List with swedish/customizable title
   void printSortedHeroesVillainsList(List<HeroModel> heroes, String title) {
-    print("\n\n=========================");
-    print("======= $title =========");
-    print("=========================");
+    print("\n===========================\n");
+    print("========== $title ==========");
+    print("===========================");
     if (heroes.isEmpty) {
       print("\n ⚠️ Inga $title hittades.\n");
     } else {
@@ -192,10 +195,10 @@ Id: ${hero.heroId} \t${hero.name}
 
       // Promt to user
       print(
-        "Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i systemet",
+        "Skriv ett namn (eller en bokstav) på en hjälte/skurk och \nse om dom finns i systemet",
       );
       print(
-        "******************************************************************************\n",
+        "======================================================\n",
       );
 
       // Taking in search input from user
@@ -243,10 +246,10 @@ Id: ${hero.heroId} \t${hero.name}
 
       // Promt to user
       print(
-        "Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i SuperHero API",
+        "Skriv ett namn (eller en bokstav) på en hjälte/skurk \noch se om dom finns i SuperHero API",
       );
       print(
-        "******************************************************************************\n",
+        "======================================================\n",
       );
 
       // Taking in search input from user

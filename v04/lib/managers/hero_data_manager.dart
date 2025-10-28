@@ -18,7 +18,6 @@ class HeroDataManager implements HeroDataManaging{
   final List<HeroModel> _heroesList = [];
 
   final LocalFileRepository localFileRepo = LocalFileRepository(localFilePath: "lib/data/jsondata/super_hero_json.json");
-  final LocalFileRepository localFileRepoMock = LocalFileRepository(localFilePath: "lib/data/jsondata/hero_mock_data.json");
   final SuperHeroApiRepository apiHeroRepo = SuperHeroApiRepository();
   
   // Function to create new hero/villian with check for if the name already exist and wont create a duplicate
