@@ -25,7 +25,7 @@ class HeroUI {
   Future<void> addHeroUI() async {
     consoleUtils.clearConsole();
     print("Lägg till hjälte");
-    print("******************\n");
+    print("======================================================\n");
 
     // Ask for name
     final heroName = inputUtils.capitalizeAllWords(
@@ -87,8 +87,8 @@ class HeroUI {
     consoleUtils.clearConsole();
 
     // Get all heroes saved in list
-    print("Alla hjältar i listan. Sorterat efter styrka (starkast först).");
-    print("**************************************************************\n");
+    print("Alla hjältar i listan. \nSorterat efter styrka (starkast först).");
+    print("======================================================\n");
     var allHeros = await dataManager.getAllHeroesLocal();
 
     // Sort by strength
@@ -98,13 +98,12 @@ class HeroUI {
 
     // Print all
     for (var hero in allHeros) {
-      print("---------------------");
+      print("======================================================");
       stdout.writeln("${allHeros.indexOf(hero) + 1}. ");
       print(hero.toString());
     }
 
-    print("Tryck Enter för att komma tillbaka till menyn");
-    stdin.readLineSync();
+    await letsUserChooseDeleteOrStartMenu();
   }
 
   // Function to handle UI for showing all the heroes and villians seperated
@@ -114,9 +113,14 @@ class HeroUI {
     // Get all heroes saved in list and print them seperated by alignment
     var all = await dataManager.sortedHeroesVillains();
     printSortedHeroesVillainsList(all["heroes"] ?? [], "Hjältar");
+    printSortedHeroesVillainsList(all["neutrals"] ?? [], "Neutral");
     printSortedHeroesVillainsList(all["villains"] ?? [], "Skurkar");
+    
+    await letsUserChooseDeleteOrStartMenu();
+  }
 
-    // Let the user choose to delete a hero or villian or go back to start menu
+  // Function to let user choose to delete a chosen hero/villian based on id or go back to start menu
+  Future<void> letsUserChooseDeleteOrStartMenu() async{
     while (true) {
       print(
         "Skriv 'd' om du vill ta bort en hjälte/skurk \neller 'b' om du vill gå tillbaka till startmenyn: ",
@@ -128,17 +132,17 @@ class HeroUI {
       } else if (input == "d") {
         await deleteHeroUI();
       }else{
-        print("❗ Ogiltigt val. Försök igen.\n");
+        consoleUtils.invalidChoice();
         continue;
       }
     }
   }
-
+ 
   // Function to handle UI for printing Sorted Heroes and Villains List with swedish/customizable title
   void printSortedHeroesVillainsList(List<HeroModel> heroes, String title) {
-    print("\n\n=========================");
-    print("======= $title =========");
-    print("=========================");
+    print("\n======================================================");
+    print("================= $title ===========================");
+    print("======================================================");
     if (heroes.isEmpty) {
       print("\n ⚠️ Inga $title hittades.\n");
     } else {
@@ -175,11 +179,11 @@ Id: ${hero.heroId} \t${hero.name}
             continue;
           }
         }
-        await showHerosAndVilliansUI();
+        await app.startMenu();
       }
       else{
-        print("❗ Ops, id:et finns inte, försök igen:");
-        sleep(Duration(seconds: 2));
+        print("❗ Ops, id:et finns inte, försök igen.");
+        // sleep(Duration(seconds: 2)); // TODO remove if not needed
         continue;
       }
     }
@@ -192,10 +196,10 @@ Id: ${hero.heroId} \t${hero.name}
 
       // Promt to user
       print(
-        "Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i systemet",
+        "Skriv ett namn (eller en bokstav) på en hjälte/skurk\noch se om dom finns i systemet.",
       );
       print(
-        "******************************************************************************\n",
+        "======================================================\n",
       );
 
       // Taking in search input from user
@@ -212,22 +216,25 @@ Id: ${hero.heroId} \t${hero.name}
             print(hero.toString());
           }
 
-          // Check if user wants to do new search
-          print("Vill du göra en ny sökning? (ja/nej)");
+          // Check if user wants to do new search, delete hero/villian or go back to start menu
+          print("Skriv 's' för ny sökning, 'd' för att ta bort hjälte/skurk,\neller 'b' för att gå tillbaka till startmenyn");
           while (true) {
             var userInput = stdin.readLineSync()?.trim().toLowerCase() ?? "";
 
-            if (userInput == "ja") {
+            if (userInput == "s") {
               break;
-            } else if (userInput == "nej") {
+            } else if (userInput == "d") {
+              await deleteHeroUI();
+            } else if(userInput == "b"){
               await app.startMenu();
-            } else {
-              print("Du måste skriva ja eller nej, var god försök igen:");
+            }else {
+              print("Du måste skriva 's', 'd' eller 'b', var god försök igen.");
             }
           }
         } else {
           print("Det finns ingen hjälte som matchar din sökning...");
           sleep(Duration(seconds: 3));
+          await app.startMenu();
         }
       } else {
         print("Du måste skriva något...");
@@ -243,10 +250,10 @@ Id: ${hero.heroId} \t${hero.name}
 
       // Promt to user
       print(
-        "Skriv ett namn (eller en bokstav) på en hjälte och se om dom finns i SuperHero API",
+        "Skriv ett namn (eller en bokstav) på en hjälte/skurk \noch se om dom finns i SuperHero API",
       );
       print(
-        "******************************************************************************\n",
+        "======================================================\n",
       );
 
       // Taking in search input from user
@@ -280,6 +287,7 @@ Id: ${hero.heroId} \t${hero.name}
         } else {
           print("❗ Det finns ingen hjälte som matchar din sökning...");
           sleep(Duration(seconds: 3));
+          await app.startMenu();
         }
       } else {
         print("❗ Du måste skriva något...");

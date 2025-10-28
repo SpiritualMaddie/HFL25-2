@@ -15,4 +15,14 @@ class ImageModel {
   Map<String, dynamic> toJson() => {
     "url": url,
   };
+
+  @override
+  String toString() {
+    return ("""
+-----------------------------------------------------
+Bild:
+-----------------------------------------------------
+  Url: $url
+""");
+  }
 }

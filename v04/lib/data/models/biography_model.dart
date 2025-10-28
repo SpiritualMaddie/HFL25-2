@@ -56,9 +56,9 @@ class BiographyModel {
   @override
   String toString() {
     return ("""
-------------------------------------------------
+-----------------------------------------------------
 Biografi:
-------------------------------------------------
+-----------------------------------------------------
   Fullt namn:   $fullName
   Alter egon:   $alterEgos
   Alias:        $aliases

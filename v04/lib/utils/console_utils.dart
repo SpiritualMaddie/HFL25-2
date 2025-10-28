@@ -48,7 +48,7 @@ class ConsoleUtils {
 
   // Function to give message to user about invalid input
   void invalidChoice(){
-    stdout.writeln("Ogiltigt input. Vänligen försök igen");
+    stdout.writeln("❗ Ogiltigt input. Vänligen försök igen");
     sleep(Duration(seconds: 2));
   }
 
