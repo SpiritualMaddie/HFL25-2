@@ -1,3 +1,4 @@
+import 'package:http/http.dart' as http;
 import 'package:v04/data/models/hero_model.dart';
 import 'package:v04/interfaces/hero_data_managing.dart';
 import 'package:v04/data/repositories/local_file_repository.dart';
@@ -6,19 +7,26 @@ import 'package:v04/data/repositories/super_hero_api_repository.dart';
 class HeroDataManager implements HeroDataManaging{
 
   // Private constructor for Singleton
-  HeroDataManager._internal();
+  HeroDataManager._internal({required this.apiHeroRepo});
 
   // Single static instance
-  static final HeroDataManager _instance = HeroDataManager._internal();
+  static HeroDataManager? _instance;
 
-  // Public accessor of the Singleton
-  factory HeroDataManager() => _instance;
+  // Factory only creates once
+  factory HeroDataManager({SuperHeroApiRepository? apiRepo}){
+    _instance ??= HeroDataManager._internal(
+      apiHeroRepo: apiRepo ?? SuperHeroApiRepository(client: http.Client()),
+    );
+    return _instance!;
+  }
 
   // List of heroes
   final List<HeroModel> _heroesList = [];
 
-  final LocalFileRepository localFileRepo = LocalFileRepository(localFilePath: "lib/data/jsondata/super_hero_json.json");
-  final SuperHeroApiRepository apiHeroRepo = SuperHeroApiRepository();
+  final LocalFileRepository localFileRepo = LocalFileRepository(
+    localFilePath: "lib/data/jsondata/super_hero_json.json"
+  );
+  final SuperHeroApiRepository apiHeroRepo;
   
   // Function to create new hero/villian with check for if the name already exist and wont create a duplicate
   @override
