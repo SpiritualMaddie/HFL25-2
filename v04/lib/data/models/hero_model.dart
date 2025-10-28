@@ -13,7 +13,7 @@ class HeroModel {
   final PowerstatsModel powerstats;
   final BiographyModel biography;
   final AppearanceModel appearance;
-  final ImageModel image;
+  final ImageModel? image;
   final WorkModel? work;
   final ConnectionsModel? connections;
 
@@ -23,7 +23,7 @@ class HeroModel {
       required this.powerstats,
       required this.biography,
       required this.appearance,
-      required this.image,
+      this.image,
       this.work,
       this.connections
   });
@@ -37,7 +37,6 @@ class HeroModel {
     if(json["powerstats"] == null) missingFields.add("intelligence");
     if(json["biography"] == null) missingFields.add("strength");
     if(json["appearance"] == null) missingFields.add("speed");
-    if(json["image"] == null) missingFields.add("image");
 
     if(missingFields.isNotEmpty){
         throw FormatException("Missing required fields: ${missingFields.join(", ")}");
@@ -57,9 +56,7 @@ class HeroModel {
                     : AppearanceModel(gender: "unknown", race: "unknown", height: ["unknown"], weight: ["unknown"]),
         work : WorkModel.fromJson(json["work"]),
         connections : ConnectionsModel.fromJson(json["connections"]),
-        image : json["image"] != null
-                ? ImageModel.fromJson(json["image"])
-                : ImageModel(url: "unknown"),
+        image : ImageModel.fromJson(json["image"])
     );
   }
     
@@ -72,7 +69,7 @@ class HeroModel {
     "appearance": appearance.toJson(),
     "work": work?.toJson(),
     "connections": connections?.toJson(),
-    "image": image.toJson(),
+    "image": image?.toJson(),
   };
 
   // Function to override toString and print the HeroModel more user friendly
@@ -85,8 +82,8 @@ Namn:   $name
 ${powerstats.toString()}
 ${biography.toString()}
 ${appearance.toString()}
-${work.toString()}
-${connections.toString()}
+${work?.toString()}
+${connections?.toString()}
 =====================================================
 """);
   }

@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:v04/data/models/biography_model.dart';
-import 'package:v04/data/models/appearance_model.dart';
-import 'package:v04/data/models/powerstats_model.dart';
-import 'package:v04/data/models/work_model.dart';
-import 'package:v04/data/models/connections_model.dart';
-import 'package:v04/data/models/image_model.dart';
 import 'package:v04/utils/input_utils.dart';
 import 'package:v04/utils/console_utils.dart';
+import 'package:v04/data/models/work_model.dart';
+import 'package:v04/data/models/image_model.dart';
 import 'package:v04/validators/get_valid_int.dart';
+import 'package:v04/data/models/biography_model.dart';
+import 'package:v04/data/models/powerstats_model.dart';
+import 'package:v04/data/models/appearance_model.dart';
+import 'package:v04/data/models/connections_model.dart';
 
 class GetModelInput {
 
@@ -106,9 +106,9 @@ final getValidInt = GetValidInt();
   }
 
   ImageModel getImageInput() {
-    stdout.writeln("\n🖼️ Bild - Ange en URL till hjältebild:");
+    stdout.writeln("\n🖼️ Bild - Ange en URL till hjältebild (Kan lämnas tomt):");
 
-    String url = inputUtils.promptNotEmpty("Bild-URL:");
+    String url = inputUtils.promptOptional("Bild-URL:");
 
     return ImageModel(url: url);
   }  

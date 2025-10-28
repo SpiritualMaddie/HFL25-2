@@ -14,7 +14,7 @@ void main() {
     test('should add heroes and retrieve them correctly', () async {
       final dataManager = HeroDataManager();
 
-      final currentHeroes = await dataManager.getAllHeroes();
+      final currentHeroes = await dataManager.getAllHeroesLocal();
       currentHeroes.clear();
 
       final superman = HeroModel(
@@ -96,7 +96,7 @@ void main() {
       await dataManager.createHero(superman);
       await dataManager.createHero(wonderWoman);
 
-      final heroes = await dataManager.getAllHeroes();
+      final heroes = await dataManager.getAllHeroesLocal();
 
       // Assert total count
       expect(heroes.length, equals(2));
