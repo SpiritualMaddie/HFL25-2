@@ -29,7 +29,7 @@ This repository contains four progressive projects, each building upon concepts 
 
 ## Project Progression
 
-### v01 - Calculator 🔢
+### v01 - Calculator
 **First Steps in Dart**
 
 A simple CLI calculator that performs basic arithmetic operations.
